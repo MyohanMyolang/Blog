@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 프로젝트 소개
 
-## Getting Started
+> 자신의 일상과 개발기록을 남기기 위한 프로젝트.
 
-First, run the development server:
+## 블로그라면 velog, tistory와 같은 다른 형태가 있는데 어째서 개발을 하였는가?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+> 배운 기술을 활용하기에 가장 심플하며, 새로운 기능의 추가에 대하여 가장 자유로운 형태라고 생각하여 선택하게 되었다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> 또한 velog에도 같이 작성할 예정이다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# 추후 계획
 
-## Learn More
+- 지속적인 업데이트를 통하여 더욱 발전 시키기.
+- AWS Route 53과 EC2를 사용하여 상황에 따라 Spring Boot Server를 사용하여 처리하는 형태로 변경한다.
 
-To learn more about Next.js, take a look at the following resources:
+# 현재 적용해보고 싶은 기술들
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- GraphQl
+- MSA 형태의 구조
+- Spring Boot, NestJs와의 연결
+- IOC를 이용한 DI
+- Zustand를 이용한 상태관리
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 어째서 곧바로 적용하지 않았는가?
 
-## Deploy on Vercel
+> 변명에 가깝지만 새롭게 배운 기술들을 하나의 프로젝트에 곧바로 투입하였다가는 이도저도 되지 않아 완성시키지도 못할 빠에는 하나의 기술에 집중하여 익숙해진 후 단계별로 적용시키는 것이 자신에게 알맞다고 생각하였기 때문에.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 왜 그것이 자신에게 알맞다 생각하였는가?
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> 여지껏 사소한 작업으로 계획하고 실행하던 도중 이것저것 떠올라 그것에 흥미가 당긴다면 무조건적으로 추가시키고 잘 어울러지게 만들기 위해 시간을 할애하였었다. <br />
+> 하지만 그로인해 걷잡을 수 없이 방대해져 결국엔 완성시키지 못하고 사고로 인하여 다 잃어버린 경험이 있기에 좀 더 나은 자신의 발전을 위하여 이 방식을 채택하는게 알맞다 생각하였기 때문.

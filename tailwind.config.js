@@ -14,5 +14,20 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    ({ addUtilities }) => {
+      addUtilities({
+        ".NavItem": {
+          "@apply text-2xl text-cyan-200": "",
+          "transition-duration": '200ms',
+          '&:hover': {
+            'color': 'white',
+          },
+          '&:active': {
+            'color': 'gray'
+          }
+        }
+      })
+    }
+  ],
 }
