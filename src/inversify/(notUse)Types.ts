@@ -56,11 +56,13 @@ class InversifyManager {
   public setContainer(setter: (container: Container) => void) {
     setter(this._Container);
   }
+
+  public getClass<T>(identifierName: string) {
+    return this._Container.get<T>(identifierName);
+  }
 }
 
 const InverManager = new InversifyManager();
-
-export default InverManager;
 
 /**
  * 여러 Configuration을 한 곳에서 관리하고, 등록 시킨다면 복잡하지 않을 거라 생각하였지만 오히려 더 복잡해질 것 같아 일시 중단.

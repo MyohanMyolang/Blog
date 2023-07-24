@@ -14,8 +14,8 @@ const NavItemList: item[] = [
     name: "About",
   },
   {
-    herf: "/posts",
-    name: "Posts",
+    herf: "/dev",
+    name: "Dev",
   },
   {
     herf: "/life",

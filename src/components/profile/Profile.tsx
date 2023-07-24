@@ -5,8 +5,8 @@ type Props = {};
 
 export default function Profile({}: Props) {
   return (
-    <>
-      <div id="Profile" className="flex justify-center pb-4">
+    <div className="[&>div]:pb-4">
+      <div id="Profile" className="flex justify-center ">
         <div id="ProfileImage" className="overflow-hidden rounded-full">
           <Image
             src="http://placehold.it/240x240/a9e2ff/2ea5e3&text=tmepImage"
@@ -20,6 +20,6 @@ export default function Profile({}: Props) {
         <h1 className="text-3xl font-bold ">Myolang</h1>
         <h4>temp Text</h4>
       </div>
-    </>
+    </div>
   );
 }
