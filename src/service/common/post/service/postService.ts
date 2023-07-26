@@ -13,7 +13,11 @@ export class PostService {
     this._postRepository = postRepository;
   }
 
-  public getRecentryPost(postNum: number) {
+  public getRecentryPosts(postNum: number) {
     return this._postRepository.getRecentryPosts(postNum).reverse();
+  }
+
+  public getFeaturedPosts() {
+    return this._postRepository.getFeaturedPosts();
   }
 }

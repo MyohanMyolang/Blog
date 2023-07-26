@@ -20,7 +20,7 @@ let posts: PostType[] = [
     date: "2023-07-22",
     title: "tempTitle",
     des: "temp Des",
-    featured: false,
+    featured: true,
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ let posts: PostType[] = [
     date: "2023-07-22",
     title: "tempTitle",
     des: "temp Des",
-    featured: false,
+    featured: true,
   },
   {
     id: 5,
@@ -56,7 +56,7 @@ let posts: PostType[] = [
     date: "2023-07-22",
     title: "tempTitle",
     des: "temp Des",
-    featured: false,
+    featured: true,
   },
   {
     id: 7,
@@ -74,7 +74,7 @@ let posts: PostType[] = [
     date: "2023-07-22",
     title: "tempTitle",
     des: "temp Des",
-    featured: false,
+    featured: true,
   },
   {
     id: 9,
@@ -83,7 +83,7 @@ let posts: PostType[] = [
     date: "2023-07-22",
     title: "tempTitle",
     des: "temp Des",
-    featured: false,
+    featured: true,
   },
   {
     id: 10,
@@ -166,8 +166,8 @@ let postsCount = posts.length;
 
 @injectable()
 export default class MemoryPostRepository implements PostRepository {
-  constructor() { }
-  
+  constructor() {}
+
   public getRecentryPosts(postNum: number): PostType[] {
     const length = postsCount;
     const result: PostType[] = posts.slice(
@@ -176,21 +176,16 @@ export default class MemoryPostRepository implements PostRepository {
 
     return result;
   }
-  
+
   /* 
   개발 도중 생각 한 것
     ㄴ relation DB를 사용하여 기능을 구현한 경우 query를 어떻게 만들어야 할까 생각이 들었다.
     ㄴ 만약 한 table안에 모든 Post들이 들어있다 가정하고, 
     ㄴ limit과 offset을 이용하면 더욱 간단하게 구현 가능할 것 같다.
   */
-  getFeaturedPosts(): PostType[] {
-    let posts : PostType[];
-    
-    for (let i = 0; i < 10; i++){
-      if()
-    }
 
-    return posts;
+  getFeaturedPosts(): PostType[] {
+    return posts.filter((item, index) => item.featured);
   }
 
   getPost(postId: number) {

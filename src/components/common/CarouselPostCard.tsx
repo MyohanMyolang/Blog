@@ -7,18 +7,17 @@ type Props = {
   post: PostType;
 };
 
-export default function PostCard({ post }: Props) {
-  post.title = post.title.concat(" Blog Project With NextJs");
+export default function CarouselPostCard({ post }: Props) {
   return (
     <>
       <Link
         href={`\\${post.rootCategory}\\${post.id}`}
-        className="bg-white dark:text-white hover:text-blue-400"
+        className="dark:text-white hover:text-blue-400"
       >
         <Image
-          src="http://placehold.it/1024x600/a9e2ff/2ea5e3&text=UndefinedImage"
-          width={600}
-          height={480}
+          src="/images/posts/tempImage.png"
+          width={480}
+          height={400}
           alt="undefinedImage"
         />
         <div className="flex justify-between my-2">

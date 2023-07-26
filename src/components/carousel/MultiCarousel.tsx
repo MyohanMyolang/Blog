@@ -3,7 +3,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import CarouselCard from "../common/PostCard";
+import CarouselCard from "../common/CarouselPostCard";
 
 type Props = {
   children: React.ReactNode;
@@ -11,15 +11,15 @@ type Props = {
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
-    items: 4,
+    items: 1,
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
+    items: 1,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 3,
+    items: 1,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -36,7 +36,7 @@ export default function MultiCarousel({ children }: Props) {
       autoPlaySpeed={5000}
       responsive={responsive}
       removeArrowOnDeviceType={"mobile"}
-      itemClass="px-4"
+      itemClass="flex justify-center px-4"
     >
       {children}
     </Carousel>

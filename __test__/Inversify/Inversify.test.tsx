@@ -167,7 +167,7 @@ describe("Inversify Identifier Test", () => {
   it("recentryPosts Test", () => {
     const result: PostType[] = container
       .get<PostService>(Post_Identifier.PostService)
-      .getRecentryPost(5);
+      .getRecentryPosts(5);
     result.forEach((item, index) => {
       expect(item).toEqual(posts[posts.length - 1 - index]);
       //expect(item).toEqual(posts[posts.length - index]);
@@ -179,7 +179,7 @@ it.only("getRecentryPosts Test", () => {
   const result: PostType[] = useContainer<PostService>(
     Post_Identifier.PostService,
     (service) => {
-      return service.getRecentryPost(5);
+      return service.getRecentryPosts(5);
     }
   );
 

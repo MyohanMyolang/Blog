@@ -7,7 +7,7 @@ export default interface PostRepository {
    */
   getRecentryPosts(postNum: number): PostType[];
 
-  getFeaturedPost;
+  getFeaturedPosts(): PostType[];
 
   getPosts({ page, rootCategory }: { page: number; rootCategory: string }): any;
   getPost(postId: number): any;
