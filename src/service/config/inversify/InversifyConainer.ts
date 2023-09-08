@@ -15,4 +15,22 @@ container
 // Life
 
 // Dev
+
+type inversifyType<T, U> = {
+  identifier: symbol;
+  target: new () => T extends U ? T : null;
+};
+
+export function bindDfendency<T, U>({
+  identifier,
+  target,
+}: inversifyType<T, U>): void {
+  if (target !== null) container.bind<T>(identifier).to(target as never);
+}
+
+bindDfendency<MemoryPostRepository, PostRepository>({
+  identifier: Symbol("test"),
+  target: MemoryPostRepository,
+});
+
 export { container };
