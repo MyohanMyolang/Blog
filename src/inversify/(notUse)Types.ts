@@ -1,3 +1,4 @@
+import MemoryPostRepository from "@/service/common/post/repository/MemoryPostRepository";
 import { Container } from "inversify";
 
 export type IDENTIFIER_TYPE = Object & {
@@ -11,59 +12,62 @@ export type IDENTIFIER_TYPE = Object & {
  * 커스텀 Paramater를 전달하여 내부에서 사용하고 싶은 경우
  *  InversifyManagerError의 CustomMethod를 이용하여 등록 시킨다.
  */
-type InversifyManagerErrorType = {
-  errorCode: number;
-  errorMsg: string;
-  param?: Object;
+
+type inversifyType<T, U> = {
+  identifier: symbol;
+  target: new () => T extends U ? T : null;
 };
 
-export class InversifyManagerError extends Error {
-  constructor(ErrorObject: InversifyManagerErrorType) {
-    super(ErrorObject.errorMsg);
+const ErrorCode = {
+  AlreadyHasSymbolKey: { code: 101, message: "AlreadyHasSymbolKey" },
+} as const;
+
+type ErrorObject = (typeof ErrorCode)[keyof typeof ErrorCode];
+
+class InversifyManagerError extends Error {
+  constructor(ErrorObject: ErrorObject) {
+    super(ErrorObject.message);
   }
 }
 
 class InversifyManager {
-  private _IDENTIFIER: IDENTIFIER_TYPE = {};
+  //private _IDENTIFIER: IDENTIFIER_TYPE = {};
   private _Container = new Container();
+
+  private _IDENTIFIER = new Map<symbol, new () => {}>();
 
   public constructor() {}
 
-  public appendType(identifier: IDENTIFIER_TYPE) {
+  private appendType(identifier: symbol, value: new () => {}) {
     try {
-      Object.keys(identifier).forEach((key, idx) => {
-        if (this._IDENTIFIER.hasOwnProperty(key))
-          throw new Error("중복되는 키가 존재합니다.");
-      });
-      this._IDENTIFIER = {
-        ...this._IDENTIFIER,
-        ...identifier,
-      };
+      if (this._IDENTIFIER.has(identifier))
+        throw new InversifyManagerError(ErrorCode.AlreadyHasSymbolKey);
+
+      this._IDENTIFIER.set(identifier, MemoryPostRepository);
     } catch (error) {
       if (error instanceof InversifyManagerError) {
         console.error(error.message);
-
-        console.info("중복되는 Key값이 있습니다.");
         process.exit(1);
       }
     }
   }
 
-  /**
-   *
-   * @param setter Inversify Container Setting
-   */
-  public setContainer(setter: (container: Container) => void) {
-    setter(this._Container);
+  public bindDfendency<T, U>({
+    identifier,
+    target,
+  }: inversifyType<T, U>): void {
+    if (target !== null) {
+      this.appendType(identifier, target as never);
+      this._Container.bind<T>(identifier).to(target as never);
+    }
   }
 
-  public getClass<T>(identifierName: string) {
-    return this._Container.get<T>(identifierName);
+  public getDependencyByType(type: symbol) {
+    const target = this._IDENTIFIER.get(type);
+    this._Container.get<InstanceType<typeof target>>(type);
   }
 }
 
 const InverManager = new InversifyManager();
 
-/**
- * 여러 Configuration을 한 곳에서 관리하고, 등록 시킨다면 복잡하지 않을 거라 생각하였지만 오히려 더 복잡해질 것 같아 일시 중단.
- */
+export default InverManager;
