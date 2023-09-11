@@ -11,14 +11,18 @@ import PostRepository from "@/service/common/post/repository/PostRepository";
 
 type Props = {};
 
-InverManager.bindDfendency<PostService, PostService>({
+InverManager.bindDfendency<PostService>({
   identifier: Post_Identifier.PostService,
   target: PostService,
 });
-InverManager.bindDfendency<PostRepository, MemoryPostRepository>({
+InverManager.bindDfendency<PostRepository>({
   identifier: Post_Identifier.PostRepository,
   target: MemoryPostRepository,
 });
+
+const postService: PostService = InverManager.getDependencyByType<PostService>(
+  Post_Identifier.PostService
+);
 
 export default function RecentryCarousel({}: Props) {
   /*
@@ -28,10 +32,6 @@ export default function RecentryCarousel({}: Props) {
       return service.getRecentryPosts(5);
     }
   );*/
-  const postService: PostService =
-    InverManager.getDependencyByType<PostService>(
-      Post_Identifier.PostRepository
-    );
   const recentryData: PostType[] = postService.getRecentryPosts(5);
   return (
     <div>

@@ -23,9 +23,10 @@ class InversifyManagerError extends Error {
     super(ErrorObject.message);
   }
 }
+type identifireType = string | symbol;
 
 type inversifyType<I> = {
-  identifier: symbol;
+  identifier: identifireType;
   target: new (...args: never[]) => I;
 };
 
@@ -64,14 +65,20 @@ class InversifyManager {
   */
 
   /**
-   * @param C Input Class Type What you want to DI <br /> DI 시킬 Class를 넣어주십시오.
-   * @param I Input InterFace. If Not extends Class then Input Same Class |
+   * @param I Input InterFace Or Class. | InterFace 또는 Class를 넣어주십시오.
+   * @param identifier Input The Identifier, String Or Symbol Type | Identifier를 넣어주십시오, String 또는 Symbol Type
+   * @param target Input target Class Constructor | 넣을 대상의 생성자를 넣어주십시오.
+   * @example
+   * bindDefendency<SomeInterface>({
+   *  identifier : "SomeClass",
+   *  target: SomeClass
+   * })
    */
   public bindDfendency<I>({ identifier, target }: inversifyType<I>): void {
     this._Container.bind<I>(identifier).to(target);
   }
 
-  public getDependencyByType<T>(type: symbol) {
+  public getDependencyByType<T>(type: identifireType): T {
     return this._Container.get<T>(type);
   }
 }
