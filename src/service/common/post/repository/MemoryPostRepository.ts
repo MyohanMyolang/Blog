@@ -167,6 +167,9 @@ let postsCount = posts.length;
 @injectable()
 export default class MemoryPostRepository implements PostRepository {
   constructor() {}
+  getPosts({ page, rootCategory }: { page: number; rootCategory: string; }) {
+    throw new Error("Method not implemented.");
+  }
 
   public getRecentryPosts(postNum: number): PostType[] {
     const length = postsCount;
@@ -198,9 +201,6 @@ export default class MemoryPostRepository implements PostRepository {
     throw new Error("Method not implemented.");
   }
   updatePost(postId: number) {
-    throw new Error("Method not implemented.");
-  }
-  getPosts({ page, rootCategory }: { page: number; rootCategory: string }) {
     throw new Error("Method not implemented.");
   }
 }

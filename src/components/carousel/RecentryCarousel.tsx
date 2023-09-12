@@ -8,6 +8,7 @@ import CarouselPostCard from "../common/CarouselPostCard";
 import InverManager from "@/inversify/InversifyManager";
 import MemoryPostRepository from "@/service/common/post/repository/MemoryPostRepository";
 import PostRepository from "@/service/common/post/repository/PostRepository";
+import { inject } from "inversify";
 
 type Props = {};
 
@@ -24,14 +25,8 @@ const postService: PostService = InverManager.getDependencyByType<PostService>(
   Post_Identifier.PostService
 );
 
+
 export default function RecentryCarousel({}: Props) {
-  /*
-  const recentryData: PostType[] = useContainer<PostService>(
-    Post_Identifier.PostService,
-    (service) => {
-      return service.getRecentryPosts(5);
-    }
-  );*/
   const recentryData: PostType[] = postService.getRecentryPosts(5);
   return (
     <div>
