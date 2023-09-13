@@ -4,6 +4,8 @@ import RecentryCarousel from "@/components/carousel/RecentryCarousel";
 import Profile from "@/components/profile/Profile";
 import React from "react";
 import FeaturedCarousel from "@/components/carousel/FeaturedCarousel";
+import InverManager from "@/inversify/InversifyManager";
+import "@/service/config/inversify/ConfigInversify";
 
 type Props = {};
 

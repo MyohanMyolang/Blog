@@ -12,19 +12,9 @@ import { inject } from "inversify";
 
 type Props = {};
 
-InverManager.bindDfendency<PostService>({
-  identifier: Post_Identifier.PostService,
-  target: PostService,
-});
-InverManager.bindDfendency<PostRepository>({
-  identifier: Post_Identifier.PostRepository,
-  target: MemoryPostRepository,
-});
-
 const postService: PostService = InverManager.getDependencyByType<PostService>(
   Post_Identifier.PostService
 );
-
 
 export default function RecentryCarousel({}: Props) {
   const recentryData: PostType[] = postService.getRecentryPosts(5);

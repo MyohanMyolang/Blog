@@ -8,23 +8,23 @@ import InverManager from "@/inversify/InversifyManager";
 
 type Props = {};
 
+const postService: PostService = InverManager.getDependencyByType<PostService>(
+  Post_Identifier.PostService
+);
+
 export default function FeaturedCarousel({}: Props) {
-  // const featuredData: PostType[] = useContainer<PostService>(
-  //   Post_Identifier.PostService,
-  //   (service) => {
-  //     return service.getFeaturedPosts();
-  //   }
-  // );
-  // return (
-  //   <div>
-  //     <h1 className="pb-4 text-3xl font-bold dark:text-white">
-  //       Featured Posts
-  //     </h1>
-  //     <MultiCarousel>
-  //       {featuredData.map((item, index) => {
-  //         return <CarouselPostCard key={item.title} post={item} />;
-  //       })}
-  //     </MultiCarousel>
-  //   </div>
-  // );
+  const featuredData = postService.getFeaturedPosts();
+
+  return (
+    <div>
+      <h1 className="pb-4 text-3xl font-bold dark:text-white">
+        Featured Posts
+      </h1>
+      <MultiCarousel>
+        {featuredData.map((item, index) => {
+          return <CarouselPostCard key={item.title} post={item} />;
+        })}
+      </MultiCarousel>
+    </div>
+  );
 }

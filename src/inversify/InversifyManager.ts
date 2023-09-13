@@ -2,7 +2,6 @@
  * @author MyohanMyolang
  */
 import { Container, interfaces } from "inversify";
-import Config from "@/Config";
 
 type identifireType = string | symbol;
 
@@ -14,6 +13,7 @@ class InversifyManager {
   public constructor() {}
 
   private _Container = new Container();
+  private _isInit = false;
 
   /**
    * @param I Input InterFace Or Class. | InterFace 또는 Class를 넣어주십시오.
@@ -32,10 +32,17 @@ class InversifyManager {
   public getDependencyByType<T>(type: identifireType): T {
     return this._Container.get<T>(type);
   }
+
+  public configuration(config: (() => void)[]) {
+    if (!this._isInit) {
+      config.forEach((item) => item());
+      this._isInit = !this._isInit;
+    }
+  }
 }
 
-const InverManager = new InversifyManager();
+console.log("is it call always when refresh page?");
 
-Config.forEach((config) => config());
+const InverManager = new InversifyManager();
 
 export default InverManager;

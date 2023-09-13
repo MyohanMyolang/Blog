@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NavBar from "@/components/common/NavBar";
+import "@/service/config/inversify/ConfigInversify";
 
 const inter = Inter({ subsets: ["latin"] });
 
