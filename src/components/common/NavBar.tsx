@@ -14,3 +14,5 @@ export default function NavBar({}: Props) {
     </div>
   );
 }
+
+console.log("test");

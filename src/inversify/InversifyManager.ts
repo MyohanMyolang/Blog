@@ -10,10 +10,11 @@ type inversifyType<I> = {
   target: new (...args: never[]) => I;
 };
 class InversifyManager {
-  public constructor() {}
+  private constructor() {}
 
   private _Container = new Container();
-  private _isInit = false;
+
+  private static _Instance = new InversifyManager();
 
   /**
    * @param I Input InterFace Or Class. | InterFace 또는 Class를 넣어주십시오.
@@ -34,15 +35,12 @@ class InversifyManager {
   }
 
   public configuration(config: (() => void)[]) {
-    if (!this._isInit) {
-      config.forEach((item) => item());
-      this._isInit = !this._isInit;
-    }
+    config.forEach((item) => item());
+  }
+
+  public static getInstance() {
+    return this._Instance;
   }
 }
 
-console.log("is it call always when refresh page?");
-
-const InverManager = new InversifyManager();
-
-export default InverManager;
+export default InversifyManager.getInstance();

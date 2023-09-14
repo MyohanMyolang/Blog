@@ -18,6 +18,5 @@ function PostInverConfig() {
     });
   }
 }
-
 const Config = [PostInverConfig];
 InverManager.configuration(Config);
