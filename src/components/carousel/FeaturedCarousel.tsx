@@ -4,15 +4,12 @@ import { PostType } from "@/service/common/post/types/PostTypes";
 import React from "react";
 import CarouselPostCard from "../common/CarouselPostCard";
 import MultiCarousel from "./MultiCarousel";
-import InverManager from "@/inversify/InversifyManager";
+import { container } from "@/inversify.config";
 
 type Props = {};
 
-const postService: PostService = InverManager.getDependencyByType<PostService>(
-  Post_Identifier.PostService
-);
-
 export default function FeaturedCarousel({}: Props) {
+  const postService = container.get<PostService>(Post_Identifier.PostService);
   const featuredData = postService.getFeaturedPosts();
 
   return (

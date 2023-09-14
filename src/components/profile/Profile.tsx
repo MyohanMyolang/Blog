@@ -1,13 +1,23 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 type Props = {};
 
 export default function Profile({}: Props) {
+  const router = useRouter();
   return (
     <div className="[&>div]:pb-4">
       <div id="Profile" className="flex justify-center ">
-        <div id="ProfileImage" className="overflow-hidden rounded-full">
+        <div
+          id="ProfileImage"
+          className="overflow-hidden rounded-full hover:cursor-pointer"
+          onClick={() => {
+            router.push("/about");
+          }}
+        >
           <Image
             src="http://placehold.it/240x240/a9e2ff/2ea5e3&text=tmepImage"
             alt="Profile Image"

@@ -6,7 +6,7 @@ type Props = {};
 
 export default function NavBar({}: Props) {
   return (
-    <div className="sticky top-0 flex justify-between pb-8 " id="NavBar">
+    <div className="top-0 flex justify-between pb-8 align-middle " id="NavBar">
       <Link className={`NavItem font-bold`} href="/">
         Myolang
       </Link>
@@ -14,5 +14,3 @@ export default function NavBar({}: Props) {
     </div>
   );
 }
-
-console.log("test");
