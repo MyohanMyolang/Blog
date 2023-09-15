@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.className} h-auto px-[10%] pt-8 dark:bg-gray-800`}
+        className={`${inter.className} h-auto [&>*]:px-[5%] md:[&>*]:px-[10%] md:[&>*]pt-8 dark:bg-gray-800`}
       >
         <NavBar />
         {children}

@@ -13,7 +13,7 @@ export default function FeaturedCarousel({}: Props) {
   const featuredData = postService.getFeaturedPosts();
 
   return (
-    <div>
+    <div className="text-center">
       <h1 className="pb-4 text-3xl font-bold dark:text-white">
         Featured Posts
       </h1>

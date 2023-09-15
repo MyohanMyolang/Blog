@@ -3,12 +3,12 @@ import React from "react";
 
 type Props = {};
 
-type item = {
+export type LinkItem = {
   herf: string;
   name: string;
 };
 
-const NavItemList: item[] = [
+export const NavItemList: LinkItem[] = [
   {
     herf: "/about",
     name: "About",
@@ -25,7 +25,7 @@ const NavItemList: item[] = [
 
 export default function NavItems({}: Props) {
   return (
-    <div id="NavItemWrapper" className="[&>*]:px-2 [&>*]:NavItem">
+    <div id="NavItemWrapper" className={"[&>*]:px-2 [&>*]:NavItem"}>
       {NavItemList.map((item) => {
         return (
           <Link key={item.name} href={item.herf}>
