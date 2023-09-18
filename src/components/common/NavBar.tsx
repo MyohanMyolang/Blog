@@ -1,24 +1,9 @@
-"use client";
-
 import Link from "next/link";
 import React from "react";
 import NavItems, { NavItemList } from "./NavItems";
 import LinkDropDownMenuBtn from "./LinkDropDownMenuBtn";
 
 type Props = {};
-
-const createDropDownItems = (event: () => void) => {
-  return NavItemList.forEach((item) => {
-    return (
-      <>
-        <Link href={item.herf} onClick={event}>
-          {item.name}
-        </Link>
-        <hr />
-      </>
-    );
-  });
-};
 
 export default function NavBar({}: Props) {
   return (

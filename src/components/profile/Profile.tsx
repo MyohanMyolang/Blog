@@ -9,7 +9,7 @@ type Props = {};
 export default function Profile({}: Props) {
   const router = useRouter();
   return (
-    <div className="[&>div]:pb-4">
+    <div className="[&>div]:pb-4 md:grid md:grid-cols-2">
       <div id="Profile" className="flex justify-center ">
         <div
           id="ProfileImage"
@@ -28,7 +28,13 @@ export default function Profile({}: Props) {
       </div>
       <div className="justify-center text-center dark:[&>*]:text-white">
         <h1 className="text-3xl font-bold ">Myolang</h1>
-        <h4>temp Text</h4>
+        <h4 className="hidden md:block md:pt-4">
+          어쩌구 저쩌구 저쩌구 어쩌구 쩌구쩌구 쩌구어쩌구 쩌구구구어쩌구 쩌구
+          어쩌구 저쩌구 저쩌구 어쩌구 쩌구쩌구 쩌구어쩌구 쩌구구구어쩌구 쩌구
+          어쩌구 저쩌구 저쩌구 어쩌구 쩌구쩌구 쩌구어쩌구 쩌구구구어쩌구 쩌구
+          어쩌구 저쩌구 저쩌구 어쩌구 쩌구쩌구 쩌구어쩌구 쩌구구구어쩌구 쩌구
+          어쩌구 저쩌구 저쩌구 어쩌구 쩌구쩌구 쩌구어쩌구 쩌구구구어쩌구 쩌구
+        </h4>
       </div>
     </div>
   );

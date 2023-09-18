@@ -13,7 +13,7 @@ export default function RecentryCarousel({}: Props) {
     .get<PostService>(Post_Identifier.PostService)
     .getRecentryPosts(5);
   return (
-    <div>
+    <div className="text-center">
       <h1 className="pb-4 text-3xl font-bold dark:text-white">
         Recentry Posts
       </h1>
