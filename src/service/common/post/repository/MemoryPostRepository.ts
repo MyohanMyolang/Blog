@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { injectable } from "inversify";
 import PostRepository from "./PostRepository";
-import { PostType } from "../types/PostTypes";
+import { PostCardType, PostType, RootCategoryType } from "../types/PostTypes";
 
 let posts: PostType[] = [
   {
@@ -167,8 +167,17 @@ let postsCount = posts.length;
 @injectable()
 export default class MemoryPostRepository implements PostRepository {
   constructor() {}
-  getPosts({ page, rootCategory }: { page: number; rootCategory: string; }) {
-    throw new Error("Method not implemented.");
+
+  getPosts({
+    page,
+    rootCategory,
+  }: {
+    page: number;
+    rootCategory: RootCategoryType;
+  }): PostCardType[] {
+    return posts
+      .filter((post) => post.rootCategory === rootCategory)
+      .slice((page - 1) * 10, page * 10 - 1);
   }
 
   public getRecentryPosts(postNum: number): PostType[] {
@@ -179,13 +188,6 @@ export default class MemoryPostRepository implements PostRepository {
 
     return result;
   }
-
-  /* 
-  개발 도중 생각 한 것
-    ㄴ relation DB를 사용하여 기능을 구현한 경우 query를 어떻게 만들어야 할까 생각이 들었다.
-    ㄴ 만약 한 table안에 모든 Post들이 들어있다 가정하고, 
-    ㄴ limit과 offset을 이용하면 더욱 간단하게 구현 가능할 것 같다.
-  */
 
   getFeaturedPosts(): PostType[] {
     return posts.filter((item, index) => item.featured);

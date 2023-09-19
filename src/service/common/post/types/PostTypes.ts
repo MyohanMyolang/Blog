@@ -6,4 +6,9 @@ export type PostType = {
   category: string;
   date: string;
   featured: boolean;
+  imgSrc?: string;
 };
+
+export type PostCardType = Omit<PostType, "featured" | "rootCategory">;
+
+export type RootCategoryType = "dev" | "life";

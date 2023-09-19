@@ -1,4 +1,4 @@
-import { PostType } from "../types/PostTypes";
+import { PostCardType, PostType, RootCategoryType } from "../types/PostTypes";
 
 export default interface PostRepository {
   /**
@@ -9,7 +9,13 @@ export default interface PostRepository {
 
   getFeaturedPosts(): PostType[];
 
-  getPosts({ page, rootCategory }: { page: number; rootCategory: string }): any;
+  getPosts({
+    page,
+    rootCategory,
+  }: {
+    page: number;
+    rootCategory: RootCategoryType;
+  }): PostCardType[];
   getPost(postId: number): any;
 
   savePost(data: PostType): boolean;
