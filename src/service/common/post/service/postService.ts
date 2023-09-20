@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { injectable, inject } from "inversify";
 import type PostRepository from "../repository/PostRepository";
 import Post_Identifier from "../inversify/PostIdentifier";
-import { PostCardType, RootCategoryType } from "../types/PostTypes";
+import { PostCardType, PostType, RootCategoryType } from "../types/PostTypes";
 
 @injectable()
 export class PostService {
@@ -30,5 +30,9 @@ export class PostService {
       page: parseInt(page),
       rootCategory,
     });
+  }
+
+  public getPost(postId: string): PostType {
+    return this._postRepository.getPost(parseInt(postId));
   }
 }

@@ -10,7 +10,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp Des1",
     featured: false,
   },
   {
@@ -19,7 +19,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp Des2",
     featured: true,
   },
   {
@@ -28,16 +28,16 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp Des3",
     featured: false,
   },
   {
     id: 4,
-    rootCategory: "dev",
+    rootCategory: "life",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp Des4",
     featured: true,
   },
   {
@@ -46,7 +46,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp Des5",
     featured: false,
   },
   {
@@ -55,7 +55,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp Des6",
     featured: true,
   },
   {
@@ -64,7 +64,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp Des7",
     featured: false,
   },
   {
@@ -73,7 +73,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp Des8",
     featured: true,
   },
   {
@@ -82,7 +82,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp Des9",
     featured: true,
   },
   {
@@ -91,7 +91,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp D421es",
     featured: false,
   },
   {
@@ -100,7 +100,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp De142s",
     featured: false,
   },
   {
@@ -109,16 +109,16 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp De421s",
     featured: false,
   },
   {
     id: 13,
-    rootCategory: "dev",
+    rootCategory: "life",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp De421s",
     featured: false,
   },
   {
@@ -127,7 +127,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp De321s",
     featured: false,
   },
   {
@@ -136,7 +136,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp De321s",
     featured: false,
   },
   {
@@ -145,7 +145,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp D321es",
     featured: false,
   },
   {
@@ -154,7 +154,7 @@ let posts: PostType[] = [
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
-    des: "temp Des",
+    des: "temp D321es",
     featured: false,
   },
 ];
@@ -194,7 +194,7 @@ export default class MemoryPostRepository implements PostRepository {
   }
 
   getPost(postId: number) {
-    throw new Error("Method not implemented.");
+    return posts.find((post) => post.id === postId);
   }
   savePost(data: PostType): boolean {
     throw new Error("Method not implemented.");

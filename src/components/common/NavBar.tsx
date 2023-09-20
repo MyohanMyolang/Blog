@@ -8,13 +8,13 @@ type Props = {};
 export default function NavBar({}: Props) {
   return (
     <>
-      <div className="sticky top-0 z-50 justify-between hidden py-8 mb-8 text-center bg-gray-900 md:flex">
+      <div className="sticky bg-opacity-40 top-0 z-50 justify-between hidden py-8 mb-8 text-center bg-gray-900 md:flex">
         <Link className={`NavItem font-bold`} href="/">
           Myolang
         </Link>
         <NavItems />
       </div>
-      <div className="sticky top-0 z-50 grid grid-cols-3 py-8 mb-8 bg-gray-900 md:hidde justify-items-stretch md:hidden">
+      <div className="sticky bg-opacity-40 top-0 z-50 grid grid-cols-3 py-8 mb-8 bg-gray-900 md:hidde justify-items-stretch md:hidden">
         <Link
           className={`NavItem font-bold justify-self-center col-start-2`}
           href="/"
