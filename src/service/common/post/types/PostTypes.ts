@@ -6,6 +6,7 @@ export type PostType = {
   category: string;
   date: string;
   featured: boolean;
+  intro?: string;
   imgSrc?: string;
 };
 

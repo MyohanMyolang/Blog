@@ -62,7 +62,7 @@ export default function LinkDropDownMenuBtn({ items }: Props) {
       </button>
       <section
         ref={dropDownRef}
-        className={`absolute [&>*]:pt-2 p-3 pr-5 mt-2 -translate-x-5 bg-cyan-100 dark:bg-gray-600 ${
+        className={`absolute [&>*]:pt-2 p-3 pr-5 mt-2 -translate-x-10 bg-cyan-100 dark:bg-gray-600 ${
           !isOpen && "hidden"
         }`}
       >

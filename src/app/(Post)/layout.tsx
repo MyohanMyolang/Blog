@@ -1,4 +1,5 @@
 import SearchBar from "@/components/common/SearchBar";
+import { searchAction } from "./actions";
 
 export default function PostLayout({
   children,
@@ -7,8 +8,7 @@ export default function PostLayout({
 }) {
   return (
     <div>
-      <SearchBar />
-      {children}
+      <SearchBar action={searchAction}>{children}</SearchBar>
     </div>
   );
 }

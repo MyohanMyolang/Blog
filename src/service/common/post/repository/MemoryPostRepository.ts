@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { injectable } from "inversify";
 import PostRepository from "./PostRepository";
 import { PostCardType, PostType, RootCategoryType } from "../types/PostTypes";
+import { omit } from "lodash";
 
 let posts: PostType[] = [
   {
@@ -177,7 +178,10 @@ export default class MemoryPostRepository implements PostRepository {
   }): PostCardType[] {
     return posts
       .filter((post) => post.rootCategory === rootCategory)
-      .slice((page - 1) * 10, page * 10 - 1);
+      .slice((page - 1) * 10, page * 10 - 1)
+      .map((post) => {
+        return omit(post, ["featured", "rootCategory"]);
+      });
   }
 
   public getRecentryPosts(postNum: number): PostType[] {

@@ -7,9 +7,12 @@ type props<T> = {
   value: T;
 };
 
-export default function useDebounce<T>({ delay, value }: props<T>) {
+export default function useDebounce<T>({
+  delay,
+  value,
+}: props<T>): [T, () => void] {
   const [debouncedValue, setDebouncedValue] = useState(value);
-  const [forceFetch, setForceFetch] = useState<() => void>();
+  const [forceFetch, setForceFetch] = useState<() => void>(() => {});
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,8 +20,10 @@ export default function useDebounce<T>({ delay, value }: props<T>) {
     }, delay);
 
     setForceFetch(() => {
-      clearTimeout(timer);
-      setDebouncedValue(value);
+      return () => {
+        clearTimeout(timer);
+        setDebouncedValue(value);
+      };
     });
 
     return () => {
