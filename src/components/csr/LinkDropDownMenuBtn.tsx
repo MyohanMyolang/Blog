@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { container } from "@/inversify.config";
-import { LinkItem } from "./NavItems";
+import { LinkItem } from "../common/NavItems";
 import Link from "next/link";
 
 type Props = {

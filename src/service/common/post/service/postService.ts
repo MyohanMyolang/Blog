@@ -3,6 +3,10 @@ import { injectable, inject } from "inversify";
 import type PostRepository from "../repository/PostRepository";
 import Post_Identifier from "../inversify/PostIdentifier";
 import { PostCardType, PostType, RootCategoryType } from "../types/PostTypes";
+import { resolve } from "path";
+
+const wait = (timeToDelay: number) =>
+  new Promise((resolve) => setTimeout(resolve, timeToDelay));
 
 @injectable()
 export class PostService {
@@ -14,25 +18,28 @@ export class PostService {
     this._postRepository = postRepository;
   }
 
-  public getRecentryPosts(postNum: number) {
+  public async getRecentryPosts(postNum: number) {
+    await wait(2000);
     return this._postRepository.getRecentryPosts(postNum).reverse();
   }
 
-  public getFeaturedPosts() {
+  public async getFeaturedPosts() {
+    await wait(2000);
     return this._postRepository.getFeaturedPosts();
   }
 
-  public getPosts(
+  public async getPosts(
     page: string,
     rootCategory: RootCategoryType
-  ): PostCardType[] {
+  ): Promise<PostCardType[]> {
+    await wait(2000);
     return this._postRepository.getPosts({
       page: parseInt(page),
       rootCategory,
     });
   }
 
-  public getPost(postId: string): PostType {
+  public async getPost(postId: string): Promise<PostType> {
     return this._postRepository.getPost(parseInt(postId));
   }
 }

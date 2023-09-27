@@ -8,8 +8,8 @@ import { container } from "@/inversify.config";
 
 type Props = {};
 
-export default function RecentryCarousel({}: Props) {
-  const recentryData: PostType[] = container
+export default async function RecentryCarousel({}: Props) {
+  const recentryData: PostType[] = await container
     .get<PostService>(Post_Identifier.PostService)
     .getRecentryPosts(5);
   return (

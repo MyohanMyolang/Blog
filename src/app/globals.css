@@ -28,14 +28,6 @@ body {
 }
 */
 
-.menu-icon {
-  @apply cursor-pointer;
-}
-
-.menu-content {
-  @apply hidden absolute p-3 pr-5 mt-2 -translate-x-5 bg-white;
-}
-
-.group:hover .menu-content {
-  @apply block;
+.skeletonColor {
+  @apply bg-gray-600;
 }

@@ -8,9 +8,9 @@ import { container } from "@/inversify.config";
 
 type Props = {};
 
-export default function FeaturedCarousel({}: Props) {
+export default async function FeaturedCarousel({}: Props) {
   const postService = container.get<PostService>(Post_Identifier.PostService);
-  const featuredData = postService.getFeaturedPosts();
+  const featuredData = await postService.getFeaturedPosts();
 
   return (
     <div className="text-center">

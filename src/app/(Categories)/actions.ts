@@ -15,5 +15,6 @@ export async function searchAction(
   const posts = container
     .get<PostService>(Post_Identifier.PostService)
     .getPosts("1", "dev");
+
   return posts;
 }

@@ -11,10 +11,11 @@ type Props = {
   };
 };
 
-export default function LifePage({ params: { page = "1" } }: Props) {
-  const posts: PostCardType[] = container
+export default async function LifePage({ params: { page = "1" } }: Props) {
+  const posts: PostCardType[] = await container
     .get<PostService>(Post_Identifier.PostService)
     .getPosts(page, "life");
+
   return (
     <>
       {posts.map((post) => (

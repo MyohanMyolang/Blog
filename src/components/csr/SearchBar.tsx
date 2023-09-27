@@ -3,9 +3,9 @@
 import useDebounce from "@/hooks/useDebounce";
 import { usePathname } from "next/navigation";
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
-import { SearchActionProps } from "../../app/(Post)/actions";
+import { SearchActionProps } from "../../app/(Categories)/actions";
 import { PostCardType } from "@/service/common/post/types/PostTypes";
-import PostCard from "./PostCard";
+import PostCard from "../common/PostCard";
 
 type Props = {
   action: (props: SearchActionProps) => Promise<PostCardType[]>;
@@ -39,7 +39,6 @@ export default function SearchBar({ action, children }: Props) {
           const result = await action({
             text: debouncedValue,
           });
-          console.log(result);
           setPosts(result);
         })();
       } catch (error) {
@@ -50,14 +49,16 @@ export default function SearchBar({ action, children }: Props) {
 
   return (
     <>
-      <input
-        className="rounded-sm"
-        onKeyDown={checkEnter}
-        onChange={textChangeHandler}
-      />
+      <div className="flex flex-row-reverse my-4 ">
+        <input
+          className="p-2 border-2 border-gray-600 rounded-lg focus:outline-none dark:bg-gray-800 dark:text-white"
+          onKeyDown={checkEnter}
+          onChange={textChangeHandler}
+        />
+      </div>
       {debouncedValue === ""
         ? children
-        : posts.map((post) => <PostCard key={post.id} postCard={post} />)}
+        : posts?.map((post) => <PostCard key={post.id} postCard={post} />)}
     </>
   );
 }

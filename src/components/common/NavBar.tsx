@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import NavItems, { NavItemList } from "./NavItems";
-import LinkDropDownMenuBtn from "./LinkDropDownMenuBtn";
+import LinkDropDownMenuBtn from "../csr/LinkDropDownMenuBtn";
 
 type Props = {};
 

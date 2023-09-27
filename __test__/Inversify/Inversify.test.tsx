@@ -2,7 +2,6 @@ import "reflect-metadata";
 import Post_Identifier from "@/service/common/post/inversify/PostIdentifier";
 import PostRepository from "@/service/common/post/repository/PostRepository";
 import { PostType } from "@/service/common/post/types/PostTypes";
-import InverManager from "@/inversify/InversifyManager";
 import MemoryPostRepository from "@/service/common/post/repository/MemoryPostRepository";
 import { PostService } from "@/service/common/post/service/PostService";
 import { inject } from "inversify";

@@ -10,8 +10,8 @@ type Props = {
   };
 };
 
-export default function PostPage({ params: { postId } }: Props) {
-  const post: PostType = container
+export default async function PostPage({ params: { postId } }: Props) {
+  const post: PostType = await container
     .get<PostService>(Post_Identifier.PostService)
     .getPost(postId);
   return (
@@ -21,4 +21,12 @@ export default function PostPage({ params: { postId } }: Props) {
       <div>{post.des}</div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const a = [];
+  for (let i = 0; i < 7; i++) a.push(i);
+  return a.map((number) => {
+    postId: number.toString();
+  });
 }
