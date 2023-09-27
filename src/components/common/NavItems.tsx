@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import ModeSwitch from "../csr/ModeSwitch";
 
 type Props = {};
 
@@ -33,6 +34,7 @@ export default function NavItems({}: Props) {
           </Link>
         );
       })}
+      <ModeSwitch />
     </div>
   );
 }

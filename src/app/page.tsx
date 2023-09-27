@@ -10,8 +10,6 @@ import Script from "next/script";
 type Props = {};
 
 export default function page({}: Props) {
-  const nonce = headers().get("x-nonce");
-
   return (
     <>
       <Profile />
