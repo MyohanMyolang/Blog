@@ -1,4 +1,4 @@
-export type PostType = {
+type PostType = {
   id: number;
   title: string;
   des: string;
@@ -10,6 +10,6 @@ export type PostType = {
   imgSrc?: string;
 };
 
-export type PostCardType = Omit<PostType, "featured" | "rootCategory">;
+type PostCardType = Omit<PostType, "featured" | "rootCategory">;
 
-export type RootCategoryType = "dev" | "life";
+type RootCategoryType = "dev" | "life";

@@ -12,7 +12,7 @@ export default function CarouselPostCard({ post }: Props) {
     <>
       <Link
         href={`\\post\\${post.id}`}
-        className="dark:text-white hover:text-blue-400 pb-4"
+        className="pb-4 dark:text-white dark:hover:text-blue-400"
       >
         {post.imgSrc !== undefined ? (
           <Image
@@ -22,7 +22,7 @@ export default function CarouselPostCard({ post }: Props) {
             alt="undefinedImage"
           />
         ) : (
-          <div className="flex flex-col w-[240px] h-[240px] text-center justify-center">
+          <div className="flex flex-col w-[240px] h-[240px] border-2 text-center justify-center">
             <h1 className="text-sm md:text-2xl">No Image</h1>
           </div>
         )}

@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import { injectable } from "inversify";
 import PostRepository from "./PostRepository";
-import { PostCardType, PostType, RootCategoryType } from "../types/PostTypes";
 import { omit } from "lodash";
 
 let posts: PostType[] = [

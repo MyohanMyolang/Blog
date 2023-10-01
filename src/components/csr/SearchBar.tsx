@@ -4,7 +4,6 @@ import useDebounce from "@/hooks/useDebounce";
 import { usePathname } from "next/navigation";
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { SearchActionProps } from "../../app/(Categories)/actions";
-import { PostCardType } from "@/service/common/post/types/PostTypes";
 import PostCard from "../common/PostCard";
 
 type Props = {
@@ -15,7 +14,7 @@ type Props = {
 export default function SearchBar({ action, children }: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [debouncedValue, forceFetch] = useDebounce<string>({
-    delay: 1000,
+    delay: 2000,
     value: searchText,
   });
   const [posts, setPosts] = useState<PostCardType[]>([]);

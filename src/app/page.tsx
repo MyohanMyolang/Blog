@@ -18,6 +18,10 @@ export default function page({}: Props) {
         <RecentryCarousel key="recentryCarousel" />
         <FeaturedCarousel key="featuredCarousel" />
       </div>
+
+      {/* TODO: Add News Box About Coding Issue To crawling or use Api from some site 
+      -- awesome dev blog
+      */}
     </>
   );
 }

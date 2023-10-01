@@ -19,16 +19,16 @@ module.exports = {
     ({ addUtilities }) => {
       addUtilities({
         ".NavItem": {
-          "@apply text-2xl text-cyan-200": "",
-          "transition-duration": '200ms',
-          '&:hover': {
-            'color': 'white',
+          "@apply text-2xl dark:text-cyan-200 text-gray-700": "",
+          "transition-duration": "200ms",
+          "&:hover": {
+            color: "white",
           },
-          '&:active': {
-            'color': 'gray'
-          }
-        }
-      })
+          "&:active": {
+            color: "gray",
+          },
+        },
+      });
     }
   ],
 }

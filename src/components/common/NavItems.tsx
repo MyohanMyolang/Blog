@@ -26,7 +26,7 @@ export const NavItemList: LinkItem[] = [
 
 export default function NavItems({}: Props) {
   return (
-    <div id="NavItemWrapper" className={"[&>*]:px-2 [&>*]:NavItem"}>
+    <div id="NavItemWrapper" className={"[&>*]:px-2 [&>*]:NavItem flex"}>
       {NavItemList.map((item) => {
         return (
           <Link key={item.name} href={item.herf}>

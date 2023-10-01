@@ -1,5 +1,3 @@
-import { PostCardType, PostType, RootCategoryType } from "../types/PostTypes";
-
 export default interface PostRepository {
   /**
    * rootCategory에 상관하지 않고 최신의 게시글을 가져온다.

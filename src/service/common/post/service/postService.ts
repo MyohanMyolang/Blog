@@ -2,7 +2,6 @@ import "reflect-metadata";
 import { injectable, inject } from "inversify";
 import type PostRepository from "../repository/PostRepository";
 import Post_Identifier from "../inversify/PostIdentifier";
-import { PostCardType, PostType, RootCategoryType } from "../types/PostTypes";
 import { resolve } from "path";
 
 const wait = (timeToDelay: number) =>

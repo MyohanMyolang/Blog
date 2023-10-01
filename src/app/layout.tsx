@@ -21,7 +21,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} h-auto [&>*]:px-[5%] md:[&>*]:px-[10%] md:[&>*]pt-8 dark:bg-gray-800`}
+        className={`${inter.className} h-auto [&>*]:px-[5%] md:[&>*]:px-[10%] md:[&>*]pt-8 bg-zinc-50 dark:bg-gray-800`}
       >
         <Providers>
           <NavBar />

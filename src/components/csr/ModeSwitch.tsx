@@ -13,13 +13,13 @@ export default function ModeSwitch({}: Props) {
     <>
       {theme === "dark" ? (
         <BiSolidSun
-          size={42}
+          className="md:w-[48px] md:h-[30px] w-8 h-8"
           cursor="pointer"
           onClick={() => setTheme("light")}
         />
       ) : (
         <BiSolidMoon
-          size={42}
+          className="md:w-[48px] md:h-[30px] w-8 h-8"
           cursor="pointer"
           onClick={() => setTheme("dark")}
         />

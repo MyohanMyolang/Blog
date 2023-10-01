@@ -31,3 +31,11 @@ body {
 .skeletonColor {
   @apply bg-gray-600;
 }
+
+.dark-bg {
+  @apply bg-gray-900;
+}
+
+.light-bg {
+  @apply bg-gray-300;
+}
