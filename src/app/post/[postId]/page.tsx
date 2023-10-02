@@ -1,7 +1,7 @@
 import { container } from "@/inversify.config";
 import Post_Identifier from "@/service/common/post/inversify/PostIdentifier";
-import { PostService } from "@/service/common/post/service/PostService";
-import { PostType } from "@/service/common/post/types/PostTypes";
+import PostService from "@/service/common/post/service/PostService";
+import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {
@@ -14,6 +14,9 @@ export default async function PostPage({ params: { postId } }: Props) {
   const post: PostType = await container
     .get<PostService>(Post_Identifier.PostService)
     .getPost(postId);
+
+  if (post === undefined) notFound();
+
   return (
     <div className="dark:text-white">
       <div>{post.title}</div>

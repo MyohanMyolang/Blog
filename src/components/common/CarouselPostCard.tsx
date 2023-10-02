@@ -1,4 +1,3 @@
-import { PostType } from "@/service/common/post/types/PostTypes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

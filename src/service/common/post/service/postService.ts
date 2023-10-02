@@ -8,7 +8,7 @@ const wait = (timeToDelay: number) =>
   new Promise((resolve) => setTimeout(resolve, timeToDelay));
 
 @injectable()
-export class PostService {
+export default class PostService {
   private _postRepository: PostRepository;
 
   constructor(

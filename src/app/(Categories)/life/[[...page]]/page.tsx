@@ -1,8 +1,7 @@
 import PostCard from "@/components/common/PostCard";
 import { container } from "@/inversify.config";
 import Post_Identifier from "@/service/common/post/inversify/PostIdentifier";
-import { PostService } from "@/service/common/post/service/PostService";
-import { PostCardType } from "@/service/common/post/types/PostTypes";
+import PostService from "@/service/common/post/service/PostService";
 import React from "react";
 
 type Props = {

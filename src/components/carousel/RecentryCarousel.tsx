@@ -1,9 +1,8 @@
 import React from "react";
 import MultiCarousel from "./MultiCarousel";
-import { PostType } from "@/service/common/post/types/PostTypes";
 import CarouselPostCard from "../common/CarouselPostCard";
 import Post_Identifier from "@/service/common/post/inversify/PostIdentifier";
-import { PostService } from "@/service/common/post/service/PostService";
+import PostService from "@/service/common/post/service/PostService";
 import { container } from "@/inversify.config";
 
 type Props = {};

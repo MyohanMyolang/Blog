@@ -3,7 +3,6 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import CarouselCard from "../common/CarouselPostCard";
 
 type Props = {
   children: React.ReactNode;

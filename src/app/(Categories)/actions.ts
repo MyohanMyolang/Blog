@@ -2,7 +2,7 @@
 
 import { container } from "@/inversify.config";
 import Post_Identifier from "@/service/common/post/inversify/PostIdentifier";
-import { PostService } from "@/service/common/post/service/PostService";
+import PostService from "@/service/common/post/service/PostService";
 
 export type SearchActionProps = {
   text: string;

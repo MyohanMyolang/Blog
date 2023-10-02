@@ -1,6 +1,6 @@
-import { PostCardType } from "@/service/common/post/types/PostTypes";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
 };
 
 export default function PostCard({ postCard }: Props) {
+  if (postCard === undefined) notFound();
   return (
     <Link
       href={`/post/${postCard.id}`}

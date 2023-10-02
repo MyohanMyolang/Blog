@@ -1,5 +1,4 @@
 import { Container } from "inversify";
-import { PostService } from "./service/common/post/service/PostService";
 import Post_Identifier from "./service/common/post/inversify/PostIdentifier";
 import PostRepository from "./service/common/post/repository/PostRepository";
 import MemoryPostRepository from "./service/common/post/repository/MemoryPostRepository";
@@ -7,6 +6,7 @@ import AuthService from "./service/common/auth/service/AuthService";
 import Auth_Identifier from "./service/common/auth/inversify/AuthIdentifier";
 import AuthRepository from "./service/common/auth/repository/AuthRepository";
 import MemoryAuthRepository from "./service/common/auth/repository/MemoryAuthRepository";
+import PostService from "./service/common/post/service/PostService";
 
 const container = new Container();
 
