@@ -1,14 +1,20 @@
 import SearchBar from "@/components/csr/SearchBar";
 import { searchAction } from "./actions";
+import { cookies } from "next/headers";
+import AdminBtnWrapper from "@/components/admin/AdminBtnWrapper";
 
 export default function PostLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const isAdmin = cookies().has("token");
   return (
     <div>
-      <SearchBar action={searchAction}>{children}</SearchBar>
+      {isAdmin && <AdminBtnWrapper />}
+      <SearchBar action={searchAction} isAdmin={isAdmin}>
+        {children}
+      </SearchBar>
     </div>
   );
 }

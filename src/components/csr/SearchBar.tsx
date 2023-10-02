@@ -5,13 +5,19 @@ import { usePathname } from "next/navigation";
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { SearchActionProps } from "../../app/(Categories)/actions";
 import PostCard from "../common/PostCard";
+import AdminBtnWrapper from "../admin/AdminBtnWrapper";
 
 type Props = {
   action: (props: SearchActionProps) => Promise<PostCardType[]>;
+  isAdmin: boolean;
   children: React.ReactNode;
 };
 
-export default function SearchBar({ action, children }: Props) {
+export default function SearchBar({
+  action,
+  children,
+  isAdmin = false,
+}: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [debouncedValue, forceFetch] = useDebounce<string>({
     delay: 2000,
@@ -48,12 +54,13 @@ export default function SearchBar({ action, children }: Props) {
 
   return (
     <>
-      <div className="flex flex-row-reverse my-4 ">
+      <div className="flex flex-row-reverse items-center my-4">
         <input
           className="p-2 border-2 border-gray-600 rounded-lg focus:outline-none dark:bg-gray-800 dark:text-white"
           onKeyDown={checkEnter}
           onChange={textChangeHandler}
         />
+        {isAdmin && <AdminBtnWrapper />}
       </div>
       {debouncedValue === ""
         ? children

@@ -17,7 +17,7 @@ export default function NavBar({}: Props) {
     const scrollHandler = debounce(() => {
       const currentY = window.scrollY;
 
-      if (curY < currentY) setNavbarOption("sticky");
+      if (curY > currentY) setNavbarOption("sticky");
       else setNavbarOption("block");
 
       setCurY(currentY);
