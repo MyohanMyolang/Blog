@@ -1,6 +1,6 @@
 import Post_Identifier from "@/service/common/post/inversify/PostIdentifier";
 import PostService from "@/service/common/post/service/PostService";
-import React from "react";
+import React, { Suspense } from "react";
 import CarouselPostCard from "../common/CarouselPostCard";
 import MultiCarousel from "./MultiCarousel";
 import { container } from "@/inversify.config";

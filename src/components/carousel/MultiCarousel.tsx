@@ -30,7 +30,7 @@ export default function MultiCarousel({ children }: Props) {
   return (
     <Carousel
       infinite
-      ssr
+      ssr={true}
       autoPlay
       autoPlaySpeed={5000}
       responsive={responsive}
