@@ -3,12 +3,12 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import React from "react";
 import { logoutAction } from "../login/actions";
+import CheckAdmin from "@/lib/CheckAdmin";
 
 type Props = {};
 
 export default function DashBoardPage({}: Props) {
-  if (!cookies().has("token")) {
-    // token 검증 필요
+  if (!CheckAdmin()) {
     notFound();
   }
 

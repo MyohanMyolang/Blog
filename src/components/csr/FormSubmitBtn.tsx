@@ -16,7 +16,7 @@ export default function LoginButton({ className, children }: Props) {
       disabled={pending}
       className={`${className} ${pending ? "bg-gray-200 text-black" : ""}`}
     >
-      {children}
+      {pending ? "Login..." : children}
     </button>
   );
 }

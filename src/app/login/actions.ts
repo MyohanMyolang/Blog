@@ -14,9 +14,8 @@ export async function loginAction(formData: FormData) {
   const user = container
     .get<AuthService>(Auth_Identifier.AuthService)
     .getUser({ id, pw });
-  console.log(user);
   if (user !== null) {
-    console.log("login success");
+    // TODO: cookieSet Jwt Token
     cookies().set("token", user);
     redirect("/", RedirectType.replace);
   }

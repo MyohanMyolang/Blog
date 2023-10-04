@@ -3,11 +3,12 @@ import { loginAction } from "./actions";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import FormSubmitBtn from "@/components/csr/FormSubmitBtn";
+import CheckAdmin from "@/lib/CheckAdmin";
 
 type Props = {};
 
 export default function LoginPage({}: Props) {
-  if (cookies().has("token")) redirect("/dashboard");
+  if (CheckAdmin()) redirect("/dashboard");
 
   return (
     <section className="bg-gray-50 dark:bg-gray-800">

@@ -14,6 +14,7 @@ export default async function PostPage({ params: { page = "1" } }: Props) {
   const posts: PostCardType[] = await container
     .get<PostService>(Post_Identifier.PostService)
     .getPosts(page, "dev");
+  console.log("render");
 
   return (
     <>
