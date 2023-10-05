@@ -13,3 +13,18 @@ type PostType = {
 type PostCardType = Omit<PostType, "featured" | "rootCategory">;
 
 type RootCategoryType = "dev" | "life";
+
+type MethodDecoratorType = {
+  target: any;
+  property: string;
+  descriptor: PropertyDescriptor;
+};
+
+type PostsReqType = {
+  page: string;
+  rootCate: RootCategoryType;
+};
+
+type PostReqType = {
+  id: string;
+};

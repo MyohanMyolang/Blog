@@ -1,7 +1,5 @@
 import PostCard from "@/components/common/PostCard";
-import { container } from "@/inversify.config";
-import Post_Identifier from "@/service/common/post/inversify/PostIdentifier";
-import PostService from "@/service/common/post/service/PostService";
+import { fetchPosts } from "@/lib/post/PostMethods";
 import React from "react";
 
 type Props = {
@@ -11,10 +9,7 @@ type Props = {
 };
 
 export default async function PostPage({ params: { page = "1" } }: Props) {
-  const posts: PostCardType[] = await container
-    .get<PostService>(Post_Identifier.PostService)
-    .getPosts(page, "dev");
-  console.log("render");
+  const posts: PostCardType[] = await fetchPosts({ page, rootCate: "dev" });
 
   return (
     <>

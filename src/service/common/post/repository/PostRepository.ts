@@ -14,9 +14,9 @@ export default interface PostRepository {
     page: number;
     rootCategory: RootCategoryType;
   }): PostCardType[];
-  getPost(postId: number): any;
+  getPost(postId: number): PostType | null;
 
-  savePost(data: PostType): boolean;
+  writePost(data: PostType): boolean;
 
   deletePost(postId: number): boolean;
 

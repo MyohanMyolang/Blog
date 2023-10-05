@@ -7,8 +7,8 @@ import CheckAdmin from "@/lib/CheckAdmin";
 
 type Props = {};
 
-export default function LoginPage({}: Props) {
-  if (CheckAdmin()) redirect("/dashboard");
+export default async function LoginPage({}: Props) {
+  if (await CheckAdmin()) redirect("/dashboard");
 
   return (
     <section className="bg-gray-50 dark:bg-gray-800">

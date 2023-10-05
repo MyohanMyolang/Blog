@@ -2,7 +2,6 @@ import "reflect-metadata";
 import { injectable, inject } from "inversify";
 import type PostRepository from "../repository/PostRepository";
 import Post_Identifier from "../inversify/PostIdentifier";
-import { resolve } from "path";
 
 const wait = (timeToDelay: number) =>
   new Promise((resolve) => setTimeout(resolve, timeToDelay));
@@ -38,7 +37,11 @@ export default class PostService {
     });
   }
 
-  public async getPost(postId: string): Promise<PostType> {
+  public async getPost(postId: string): Promise<PostType | null> {
     return this._postRepository.getPost(parseInt(postId));
+  }
+
+  public async writePost({ post }: { post: PostType }): Promise<boolean> {
+    return this._postRepository.writePost(post);
   }
 }

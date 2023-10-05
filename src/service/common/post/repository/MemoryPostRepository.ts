@@ -196,10 +196,10 @@ export default class MemoryPostRepository implements PostRepository {
     return posts.filter((item, index) => item.featured);
   }
 
-  getPost(postId: number) {
-    return posts.find((post) => post.id === postId);
+  getPost(postId: number): PostType | null {
+    return posts.find((post) => post.id === postId) ?? null;
   }
-  savePost(data: PostType): boolean {
+  writePost(data: PostType): boolean {
     throw new Error("Method not implemented.");
   }
   deletePost(postId: number): boolean {

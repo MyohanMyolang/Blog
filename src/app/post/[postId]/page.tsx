@@ -1,8 +1,5 @@
-import { container } from "@/inversify.config";
-import Post_Identifier from "@/service/common/post/inversify/PostIdentifier";
-import PostService from "@/service/common/post/service/PostService";
+import { fetchPost } from "@/lib/post/PostMethods";
 import { notFound } from "next/navigation";
-import React from "react";
 
 type Props = {
   params: {
@@ -11,11 +8,9 @@ type Props = {
 };
 
 export default async function PostPage({ params: { postId } }: Props) {
-  const post: PostType = await container
-    .get<PostService>(Post_Identifier.PostService)
-    .getPost(postId);
+  const post: PostType = await fetchPost({ id: postId });
 
-  if (post === undefined) notFound();
+  if (post === null) notFound();
 
   return (
     <div className="dark:text-white">
@@ -27,9 +22,7 @@ export default async function PostPage({ params: { postId } }: Props) {
 }
 
 export async function generateStaticParams() {
-  const a = [];
-  for (let i = 0; i < 7; i++) a.push(i);
-  return a.map((number) => {
+  return Array.from({ length: 10 }, (v, i) => i).map((number) => {
     postId: number.toString();
   });
 }
