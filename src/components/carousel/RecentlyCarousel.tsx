@@ -1,22 +1,21 @@
-import React, { Suspense } from "react";
-import CarouselPostCard from "../common/CarouselPostCard";
+import React from "react";
 import MultiCarousel from "./MultiCarousel";
+import CarouselPostCard from "../common/CarouselPostCard";
 import { fetchCarouselPosts } from "@/lib/post/PostMethods";
 
 type Props = {};
 
-export default async function FeaturedCarousel({}: Props) {
-  const featuredData: PostCardType[] = await fetchCarouselPosts({
-    type: "featured",
+export default async function RecentlyCarousel({}: Props) {
+  const recentlyData: PostCardType[] = await fetchCarouselPosts({
+    type: "recently",
   });
-
   return (
     <div className="text-center">
       <h1 className="pb-4 text-3xl font-bold dark:text-white">
-        Featured Posts
+        Recently Posts
       </h1>
       <MultiCarousel>
-        {featuredData.map((item, index) => {
+        {recentlyData.map((item, index) => {
           return <CarouselPostCard key={item.title} post={item} />;
         })}
       </MultiCarousel>

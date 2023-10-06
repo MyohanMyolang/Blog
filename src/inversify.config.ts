@@ -7,6 +7,7 @@ import Auth_Identifier from "./service/common/auth/inversify/AuthIdentifier";
 import AuthRepository from "./service/common/auth/repository/AuthRepository";
 import MemoryAuthRepository from "./service/common/auth/repository/MemoryAuthRepository";
 import PostService from "./service/common/post/service/PostService";
+import "server-only";
 
 const container = new Container();
 

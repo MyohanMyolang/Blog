@@ -168,6 +168,10 @@ let postsCount = posts.length;
 export default class MemoryPostRepository implements PostRepository {
   constructor() {}
 
+  private postConvertPostCard(post: PostType) {
+    return omit(post, ["featured", "rootCategory"]);
+  }
+
   getPosts({
     page,
     rootCategory,
@@ -179,28 +183,34 @@ export default class MemoryPostRepository implements PostRepository {
       .filter((post) => post.rootCategory === rootCategory)
       .slice((page - 1) * 10, page * 10 - 1)
       .map((post) => {
-        return omit(post, ["featured", "rootCategory"]);
+        return this.postConvertPostCard(post);
       });
   }
 
-  public getRecentryPosts(postNum: number): PostType[] {
+  public getRecentlyPosts(postNum: number): PostCardType[] {
     const length = postsCount;
     const result: PostType[] = posts.slice(
       postNum >= length ? 0 : length - postNum
     );
 
-    return result;
+    return result.map((post) => {
+      return this.postConvertPostCard(post);
+    });
   }
 
-  getFeaturedPosts(): PostType[] {
-    return posts.filter((item, index) => item.featured);
+  getFeaturedPosts(): PostCardType[] {
+    return posts
+      .filter((item, index) => item.featured)
+      .map((post) => {
+        return this.postConvertPostCard(post);
+      });
   }
 
   getPost(postId: number): PostType | null {
     return posts.find((post) => post.id === postId) ?? null;
   }
-  writePost(data: PostType): boolean {
-    throw new Error("Method not implemented.");
+  writePost(data: PostWriteReqType): boolean {
+    return true;
   }
   deletePost(postId: number): boolean {
     throw new Error("Method not implemented.");

@@ -7,7 +7,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { container } from "@/inversify.config";
 import { LinkItem } from "../common/NavItems";
 import Link from "next/link";
 

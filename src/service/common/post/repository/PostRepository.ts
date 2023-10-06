@@ -3,9 +3,9 @@ export default interface PostRepository {
    * rootCategory에 상관하지 않고 최신의 게시글을 가져온다.
    * @param postNum 가져올 Post의 수
    */
-  getRecentryPosts(postNum: number): PostType[];
+  getRecentlyPosts(postNum: number): PostCardType[];
 
-  getFeaturedPosts(): PostType[];
+  getFeaturedPosts(): PostCardType[];
 
   getPosts({
     page,
@@ -16,7 +16,7 @@ export default interface PostRepository {
   }): PostCardType[];
   getPost(postId: number): PostType | null;
 
-  writePost(data: PostType): boolean;
+  writePost(data: PostWriteReqType): boolean;
 
   deletePost(postId: number): boolean;
 

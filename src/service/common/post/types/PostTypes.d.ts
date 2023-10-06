@@ -28,3 +28,5 @@ type PostsReqType = {
 type PostReqType = {
   id: string;
 };
+
+type PostWriteReqType = {};

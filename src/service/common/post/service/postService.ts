@@ -2,6 +2,8 @@ import "reflect-metadata";
 import { injectable, inject } from "inversify";
 import type PostRepository from "../repository/PostRepository";
 import Post_Identifier from "../inversify/PostIdentifier";
+import "server-only";
+import CheckAdminDec from "@/service/lib/decorators/ChecAdminDec";
 
 const wait = (timeToDelay: number) =>
   new Promise((resolve) => setTimeout(resolve, timeToDelay));
@@ -16,12 +18,12 @@ export default class PostService {
     this._postRepository = postRepository;
   }
 
-  public async getRecentryPosts(postNum: number) {
+  public async getRecentlyPosts(postNum: number): Promise<PostCardType[]> {
     await wait(2000);
-    return this._postRepository.getRecentryPosts(postNum).reverse();
+    return this._postRepository.getRecentlyPosts(postNum).reverse();
   }
 
-  public async getFeaturedPosts() {
+  public async getFeaturedPosts(): Promise<PostCardType[]> {
     await wait(2000);
     return this._postRepository.getFeaturedPosts();
   }
@@ -41,7 +43,8 @@ export default class PostService {
     return this._postRepository.getPost(parseInt(postId));
   }
 
-  public async writePost({ post }: { post: PostType }): Promise<boolean> {
+  @CheckAdminDec()
+  public async writePost(post: PostWriteReqType): Promise<boolean> {
     return this._postRepository.writePost(post);
   }
 }

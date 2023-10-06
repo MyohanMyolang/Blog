@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 type Props = {
-  post: PostType;
+  post: PostCardType;
 };
 
 export default function CarouselPostCard({ post }: Props) {

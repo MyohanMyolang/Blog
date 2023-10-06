@@ -4,11 +4,13 @@ export async function fetchPosts({ page, rootCate }: PostsReqType) {
     {
       method: "get",
       next: {
-        tags: ["posts"],
+        tags: [`posts-${rootCate}`],
       },
     }
   );
-
+  if (result.status !== 200) {
+    return null;
+  }
   return result.json();
 }
 
@@ -23,4 +25,17 @@ export async function fetchPost({ id }: PostReqType) {
   return result.json();
 }
 
-// export async function fetchF
+export async function fetchCarouselPosts({
+  type,
+}: {
+  type: "featured" | "recently";
+}) {
+  const result = await fetch(`http://localhost:3000/api/posts/${type}`, {
+    method: "get",
+    next: {
+      tags: [`carousel-${type}`],
+    },
+  });
+
+  return result.json();
+}
