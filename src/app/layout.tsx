@@ -13,11 +13,7 @@ export const metadata: Metadata = {
   description: "Myolang Blog",
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
@@ -25,8 +21,7 @@ export default async function RootLayout({
       >
         <Providers>
           <NavBar />
-
-          {children}
+          {props.children}
           <Footer />
         </Providers>
       </body>

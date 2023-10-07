@@ -6,14 +6,22 @@ import { searchAction } from "@/app/(Categories)/actions";
 import { BsSearch } from "react-icons/bs";
 import CategiryPageLoading from "@/app/(Categories)/loading";
 import AdminMenuBtnWrapper from "../admin/AdminMenuBtnWrapper";
+import { usePathname, useRouter } from "next/navigation";
 
 type Props = {
   children: React.ReactNode;
+  post: React.ReactNode;
   isAdmin: boolean;
 };
 
-export default function CategoryPageWrapper({ children, isAdmin }: Props) {
+export default function CategoryPageWrapper({
+  children,
+  isAdmin,
+  post,
+}: Props) {
   const [isOpenSearchBar, setIsOpenSearchBar] = useState<boolean>(false);
+  const pathName = usePathname();
+
   useEffect(() => {
     // TODO: if has Session Storage Saved State then setIsOpenSearchBar(true)
     return () => {
@@ -34,10 +42,16 @@ export default function CategoryPageWrapper({ children, isAdmin }: Props) {
         {isAdmin && <AdminMenuBtnWrapper />}
       </div>
       <hr />
-      <div className={`${isOpenSearchBar && "hidden"}`}>{children}</div>
-      <div className={`${!isOpenSearchBar && "hidden"}`}>
-        <SearchBar action={searchAction} />
-      </div>
+      {!pathName.includes("/post") ? (
+        <>
+          <div className={`${isOpenSearchBar && "hidden"}`}>{children}</div>
+          <div className={`${!isOpenSearchBar && "hidden"}`}>
+            <SearchBar action={searchAction} />
+          </div>
+        </>
+      ) : (
+        <>{post}</>
+      )}
     </>
   );
 }

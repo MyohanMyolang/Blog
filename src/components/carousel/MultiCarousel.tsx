@@ -35,6 +35,7 @@ export default function MultiCarousel({ children }: Props) {
       autoPlaySpeed={5000}
       responsive={responsive}
       removeArrowOnDeviceType={"mobile"}
+      arrows={false}
       itemClass="flex justify-center px-4"
     >
       {children}

@@ -34,9 +34,15 @@ export default function SearchBar({ action }: Props) {
       try {
         // ServerAction Exception
         setPosts(undefined);
+        console.log("test");
         (async () => {
-          const result = await action({ text: debouncedValue });
-          setPosts(result);
+          try {
+            console.log("before result");
+            const result = await action({ text: debouncedValue });
+            setPosts(result);
+          } catch (error) {
+            console.log(error);
+          }
         })();
       } catch (error) {
         console.log(error);
