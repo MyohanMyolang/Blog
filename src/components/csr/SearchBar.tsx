@@ -8,9 +8,10 @@ import PostCardSkeleton from "../common/PostCardSkeleton";
 
 type Props = {
   action: (props: SearchActionProps) => Promise<PostCardType[]>;
+  isPost: boolean;
 };
 
-export default function SearchBar({ action }: Props) {
+export default function SearchBar({ action, isPost }: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [debouncedValue, forceFetch] = useDebounce<string>({
     delay: 2000,
@@ -34,10 +35,8 @@ export default function SearchBar({ action }: Props) {
       try {
         // ServerAction Exception
         setPosts(undefined);
-        console.log("test");
         (async () => {
           try {
-            console.log("before result");
             const result = await action({ text: debouncedValue });
             setPosts(result);
           } catch (error) {
@@ -62,13 +61,19 @@ export default function SearchBar({ action }: Props) {
           className="p-2 transition-shadow border-2 duration-300 focus:border-cyan-300 border-gray-600 rounded-lg focus:shadow-[0_0_5px_5px] focus:shadow-cyan-300 focus:outline-none dark:bg-gray-800 dark:text-white"
           onKeyDown={checkEnter}
           onChange={textChangeHandler}
+          placeholder="Search Post"
+          value={searchText}
         />
       </div>
-      {posts === undefined && <PostCardSkeleton />}
-      {posts === null && <p>Not Found Posts</p>}
-      {posts?.map((post) => (
-        <PostCard key={post.id} postCard={post} />
-      ))}
+      {!isPost && (
+        <>
+          {posts === undefined && <PostCardSkeleton />}
+          {posts === null && <p>Not Found Posts</p>}
+          {posts?.map((post) => (
+            <PostCard key={post.id} postCard={post} />
+          ))}
+        </>
+      )}
     </>
   );
 }

@@ -39,3 +39,5 @@ export async function fetchCarouselPosts({
 
   return result.json();
 }
+
+export async function fetchSearchPosts(props: { searchText: string }) {}

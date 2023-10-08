@@ -9,8 +9,9 @@ type Props = {
 
 export default function InterceptPostPage({ params: { postId } }: Props) {
   return (
-    <div className="fixed h-screen animation animate-spin">
+    <div className="">
       InterceptPostPage{postId}
+      hi
     </div>
   );
 }

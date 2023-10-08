@@ -6,12 +6,14 @@ import NavItems, { NavItemList } from "./NavItems";
 import LinkDropDownMenuBtn from "../csr/LinkDropDownMenuBtn";
 import ModeSwitch from "../csr/ModeSwitch";
 import { debounce } from "lodash";
+import { usePathname } from "next/navigation";
 
 type Props = {};
 
 export default function NavBar({}: Props) {
   const [navbarOption, setNavbarOption] = useState<"sticky" | "block">("block");
   const [curY, setCurY] = useState(0);
+  const isPost = usePathname().includes("/post");
 
   useEffect(() => {
     const scrollHandler = debounce(() => {
@@ -21,7 +23,7 @@ export default function NavBar({}: Props) {
       else setNavbarOption("block");
 
       setCurY(currentY);
-    }, 300);
+    }, 200);
     window.addEventListener("scroll", scrollHandler);
 
     return () => window.removeEventListener("scroll", scrollHandler);
@@ -30,7 +32,9 @@ export default function NavBar({}: Props) {
   return (
     <>
       <div
-        className={`${navbarOption} top-0 z-50 justify-between hidden py-8 mb-8 text-center light-bg dark:bg-gray-900 md:flex`}
+        className={`${
+          isPost ? "block" : navbarOption
+        } top-0 z-50 justify-between hidden py-8 mb-8 text-center light-bg dark:bg-gray-900 md:flex`}
       >
         <Link className={`NavItem font-bold`} href="/">
           Myolang
@@ -38,7 +42,9 @@ export default function NavBar({}: Props) {
         <NavItems />
       </div>
       <div
-        className={`${navbarOption} top-0 z-50 grid grid-cols-3 py-8 mb-8 light-bg dark:bg-gray-900  md:hidde justify-items-stretch md:hidden`}
+        className={`${
+          isPost ? "block" : navbarOption
+        } top-0 z-50 grid grid-cols-3 py-8 mb-8 light-bg dark:bg-gray-900  md:hidde justify-items-stretch md:hidden`}
       >
         <ModeSwitch />
         <Link

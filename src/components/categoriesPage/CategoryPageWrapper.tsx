@@ -7,6 +7,7 @@ import { BsSearch } from "react-icons/bs";
 import CategiryPageLoading from "@/app/(Categories)/loading";
 import AdminMenuBtnWrapper from "../admin/AdminMenuBtnWrapper";
 import { usePathname, useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
   children: React.ReactNode;
@@ -21,13 +22,8 @@ export default function CategoryPageWrapper({
 }: Props) {
   const [isOpenSearchBar, setIsOpenSearchBar] = useState<boolean>(false);
   const pathName = usePathname();
+  const isPost = pathName.includes("/post");
 
-  useEffect(() => {
-    // TODO: if has Session Storage Saved State then setIsOpenSearchBar(true)
-    return () => {
-      // TODO: Save Open State
-    };
-  }, []);
   return (
     <>
       <div
@@ -42,16 +38,26 @@ export default function CategoryPageWrapper({
         {isAdmin && <AdminMenuBtnWrapper />}
       </div>
       <hr />
-      {!pathName.includes("/post") ? (
-        <>
-          <div className={`${isOpenSearchBar && "hidden"}`}>{children}</div>
-          <div className={`${!isOpenSearchBar && "hidden"}`}>
-            <SearchBar action={searchAction} />
-          </div>
-        </>
-      ) : (
-        <>{post}</>
-      )}
+      <div className={`${!isOpenSearchBar && "hidden"}`}>
+        <SearchBar action={searchAction} isPost={isPost} />
+      </div>
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={isPost ? "post" : "postList"}
+          animate={{ opacity: 1, scaleY: 1 }}
+          initial={{ opacity: 0, scaleY: 2 }}
+          exit={{ opacity: 0, scaleY: 0.1 }}
+          transition={{ duration: 0.3 }}
+        >
+          {!isPost ? (
+            <>
+              <div className={`${isOpenSearchBar && "hidden"}`}>{children}</div>
+            </>
+          ) : (
+            <>{post}</>
+          )}
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
