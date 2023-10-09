@@ -44,7 +44,8 @@ export default class PostService {
   }
 
   @CheckAdminDec()
-  public async writePost(post: PostWriteReqType): Promise<boolean> {
+  public async writePost(post: PostWriteReqType): Promise<number> {
+    await wait(2000);
     return this._postRepository.writePost(post);
   }
 }

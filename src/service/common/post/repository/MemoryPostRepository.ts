@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { injectable } from "inversify";
 import PostRepository from "./PostRepository";
 import { omit } from "lodash";
+import { DateTime } from "luxon";
 
 let posts: PostType[] = [
   {
@@ -209,8 +210,14 @@ export default class MemoryPostRepository implements PostRepository {
   getPost(postId: number): PostType | null {
     return posts.find((post) => post.id === postId) ?? null;
   }
-  writePost(data: PostWriteReqType): boolean {
-    return true;
+  writePost(data: PostWriteReqType): number {
+    let postData: PostType = {
+      id: postsCount++,
+      date: DateTime.now().toFormat("YYYY-MM-DD"),
+      featured: false,
+      ...data,
+    };
+    return 1; // return post Number
   }
   deletePost(postId: number): boolean {
     throw new Error("Method not implemented.");

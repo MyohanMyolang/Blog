@@ -2,9 +2,7 @@
 
 import React, { Suspense, useEffect, useState } from "react";
 import SearchBar from "../csr/SearchBar";
-import { searchAction } from "@/app/(Categories)/actions";
 import { BsSearch } from "react-icons/bs";
-import CategiryPageLoading from "@/app/(Categories)/loading";
 import AdminMenuBtnWrapper from "../admin/AdminMenuBtnWrapper";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -39,7 +37,7 @@ export default function CategoryPageWrapper({
       </div>
       <hr />
       <div className={`${!isOpenSearchBar && "hidden"}`}>
-        <SearchBar action={searchAction} isPost={isPost} />
+        <SearchBar isPost={isPost} />
       </div>
       <AnimatePresence mode="popLayout">
         <motion.div

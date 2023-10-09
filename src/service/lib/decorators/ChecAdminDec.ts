@@ -7,10 +7,8 @@ export default function CheckAdminDec() {
 
     des.value = function (...args: any) {
       if (cookies().has("token" /** && Token 검증 */)) {
-        console.log("it's admin");
         return originMethod.apply(this, args);
       }
-      console.log("it's not admin");
     };
   };
 }

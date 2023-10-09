@@ -13,7 +13,6 @@ type Props = {};
 export default function NavBar({}: Props) {
   const [navbarOption, setNavbarOption] = useState<"sticky" | "block">("block");
   const [curY, setCurY] = useState(0);
-  const isPost = usePathname().includes("/post");
 
   useEffect(() => {
     const scrollHandler = debounce(() => {
@@ -32,9 +31,7 @@ export default function NavBar({}: Props) {
   return (
     <>
       <div
-        className={`${
-          isPost ? "block" : navbarOption
-        } top-0 z-50 justify-between hidden py-8 mb-8 text-center light-bg dark:bg-gray-900 md:flex`}
+        className={`${navbarOption} top-0 z-50 justify-between hidden py-8 mb-8 text-center light-bg dark:bg-gray-900 md:flex`}
       >
         <Link className={`NavItem font-bold`} href="/">
           Myolang
@@ -42,9 +39,7 @@ export default function NavBar({}: Props) {
         <NavItems />
       </div>
       <div
-        className={`${
-          isPost ? "block" : navbarOption
-        } top-0 z-50 grid grid-cols-3 py-8 mb-8 light-bg dark:bg-gray-900  md:hidde justify-items-stretch md:hidden`}
+        className={`${navbarOption} top-0 z-50 grid grid-cols-3 py-8 mb-8 light-bg dark:bg-gray-900  md:hidde justify-items-stretch md:hidden`}
       >
         <ModeSwitch />
         <Link

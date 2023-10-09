@@ -16,7 +16,7 @@ export default interface PostRepository {
   }): PostCardType[];
   getPost(postId: number): PostType | null;
 
-  writePost(data: PostWriteReqType): boolean;
+  writePost(data: PostWriteReqType): number;
 
   deletePost(postId: number): boolean;
 

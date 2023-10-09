@@ -7,7 +7,7 @@ type Props = {};
 export default function AdminMenuBtnWrapper({}: Props) {
   return (
     <>
-      <Link href="write">
+      <Link href="/write">
         <BsPencil
           className="transition-transform duration-300 hover:scale-150"
           size={"24px"}

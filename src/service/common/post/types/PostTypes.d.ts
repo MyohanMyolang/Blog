@@ -2,7 +2,7 @@ type PostType = {
   id: number;
   title: string;
   des: string;
-  rootCategory: string;
+  rootCategory: RootCategoryType;
   category: string;
   date: string;
   featured: boolean;
@@ -29,4 +29,4 @@ type PostReqType = {
   id: string;
 };
 
-type PostWriteReqType = {};
+type PostWriteReqType = Omit<PostType, "featured" | "id" | "date">;

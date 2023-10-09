@@ -2,23 +2,22 @@
 
 import useDebounce from "@/hooks/useDebounce";
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
-import { SearchActionProps } from "../../app/(Categories)/actions";
 import PostCard from "../common/PostCard";
 import PostCardSkeleton from "../common/PostCardSkeleton";
+import { fetchSearchPosts } from "@/lib/post/PostMethods";
 
 type Props = {
-  action: (props: SearchActionProps) => Promise<PostCardType[]>;
   isPost: boolean;
 };
 
-export default function SearchBar({ action, isPost }: Props) {
+export default function SearchBar({ isPost }: Props) {
   const [searchText, setSearchText] = useState<string>("");
   const [debouncedValue, forceFetch] = useDebounce<string>({
     delay: 2000,
     value: searchText,
   });
   const [posts, setPosts] = useState<PostCardType[] | null | undefined>([]);
-
+  const [isSearching, setIsSearching] = useState(false);
   const checkEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       forceFetch();
@@ -35,24 +34,17 @@ export default function SearchBar({ action, isPost }: Props) {
       try {
         // ServerAction Exception
         setPosts(undefined);
+        setIsSearching(true);
         (async () => {
-          try {
-            const result = await action({ text: debouncedValue });
-            setPosts(result);
-          } catch (error) {
-            console.log(error);
-          }
+          const result = await fetchSearchPosts({ searchText: debouncedValue });
+          setPosts(result);
+          setIsSearching(false);
         })();
       } catch (error) {
         console.log(error);
       }
     }
-  }, [debouncedValue, action]);
-
-  useEffect(() => {
-    // TODO: Add Posts to Session Storage And Scroll | Check Before Searched Result when Mount This Page
-    return () => {};
-  }, []);
+  }, [debouncedValue]);
 
   return (
     <>
@@ -67,6 +59,13 @@ export default function SearchBar({ action, isPost }: Props) {
       </div>
       {!isPost && (
         <>
+          <div
+            className={`${
+              isSearching ? "animate-pulse" : ""
+            } flex justify-center pb-4 text-2xl font-bold`}
+          >
+            {isSearching ? "검색중..." : "검색 결과"}
+          </div>
           {posts === undefined && <PostCardSkeleton />}
           {posts === null && <p>Not Found Posts</p>}
           {posts?.map((post) => (

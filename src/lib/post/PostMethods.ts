@@ -40,4 +40,23 @@ export async function fetchCarouselPosts({
   return result.json();
 }
 
-export async function fetchSearchPosts(props: { searchText: string }) {}
+export async function fetchSearchPosts(props: { searchText: string }) {
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_baseUrl}/api/posts/search`,
+    {
+      method: "post",
+      body: JSON.stringify(props),
+    }
+  );
+
+  return result.json();
+}
+
+export async function fetchWritePost(post: PostWriteReqType) {
+  const result = await fetch("http://localhost:3000/api/post", {
+    method: "post",
+    body: JSON.stringify(post),
+  });
+
+  return result.json();
+}
