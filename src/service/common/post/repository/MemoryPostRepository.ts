@@ -182,7 +182,7 @@ export default class MemoryPostRepository implements PostRepository {
   }): PostCardType[] {
     return posts
       .filter((post) => post.rootCategory === rootCategory)
-      .slice((page - 1) * 10, page * 10 - 1)
+      .slice((page - 1) * 10, page * 10)
       .map((post) => {
         return this.postConvertPostCard(post);
       });
@@ -208,16 +208,20 @@ export default class MemoryPostRepository implements PostRepository {
   }
 
   getPost(postId: number): PostType | null {
+    console.log(posts);
     return posts.find((post) => post.id === postId) ?? null;
   }
   writePost(data: PostWriteReqType): number {
-    let postData: PostType = {
-      id: postsCount++,
-      date: DateTime.now().toFormat("YYYY-MM-DD"),
+    const { year, month, day } = DateTime.now();
+    const postData: PostType = {
+      id: ++postsCount,
+      date: `${year}-${month}-${day}`,
       featured: false,
       ...data,
     };
-    return 1; // return post Number
+    posts.unshift(postData);
+    console.log(posts);
+    return postsCount; // return post Number
   }
   deletePost(postId: number): boolean {
     throw new Error("Method not implemented.");

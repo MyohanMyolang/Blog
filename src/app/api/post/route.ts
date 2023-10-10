@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
   if (!result) {
     return routeError({ msg: "Can't Write Post", status: 418 });
   }
-  revalidateTag(`posts-${1}`); //post root category
+  revalidateTag(`posts-${body.rootCategory}`); //post root category
+  revalidateTag(`post-${result}`);
   return NextResponse.json(result);
 }

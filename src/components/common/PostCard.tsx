@@ -24,8 +24,8 @@ export default function PostCard({ postCard }: Props) {
         )}
       </div>
       <div className="flex flex-col justify-between md:h-[240px] overflow-hidden ">
-        <div className="flex flex-col justify-around pb-4 md:flex-row">
-          <h1 className="text-lg font-bold md:text-2xl ">{postCard.title}</h1>
+        <div className="flex flex-col justify-between px-4 pb-4 md:flex-row">
+          <h1 className="text-lg font-bold md:text-2xl">{postCard.title}</h1>
           <h4 className="">{postCard.date}</h4>
         </div>
         <div className="hidden row-start-2 pr-4 md:block">

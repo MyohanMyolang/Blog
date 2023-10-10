@@ -28,7 +28,7 @@ export default function WritePost({}: Props) {
     setIsWriting(true);
     const result = await fetchWritePost(post);
     if (result !== null) {
-      route.push(`/post/${result}`);
+      route.push(`/post/${result}`, {});
       return null;
     }
     alert("게시글 저장에 실패하였습니다!");
