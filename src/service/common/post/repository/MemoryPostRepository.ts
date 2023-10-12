@@ -208,7 +208,6 @@ export default class MemoryPostRepository implements PostRepository {
   }
 
   getPost(postId: number): PostType | null {
-    console.log(posts);
     return posts.find((post) => post.id === postId) ?? null;
   }
   writePost(data: PostWriteReqType): number {
@@ -220,11 +219,15 @@ export default class MemoryPostRepository implements PostRepository {
       ...data,
     };
     posts.unshift(postData);
-    console.log(posts);
     return postsCount; // return post Number
   }
   deletePost(postId: number): boolean {
-    throw new Error("Method not implemented.");
+    const idx = posts.findIndex((post) => post.id === postId);
+    if (idx > -1) {
+      posts.splice(idx, 1);
+      return true;
+    }
+    return false;
   }
   updatePost(postId: number) {
     throw new Error("Method not implemented.");

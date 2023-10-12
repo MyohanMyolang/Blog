@@ -48,4 +48,9 @@ export default class PostService {
     await wait(2000);
     return this._postRepository.writePost(post);
   }
+
+  @CheckAdminDec()
+  public async deletePost(postId: string): Promise<boolean> {
+    return this._postRepository.deletePost(parseInt(postId));
+  }
 }

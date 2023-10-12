@@ -22,7 +22,7 @@ export default async function InterceptPostPage({ params: { postId } }: Props) {
       <div>{post.date}</div>
       <div>{post.des}</div>
       <div className="flex flex-row-reverse">
-        {isAdmin && <AdminPostContBtnWrapper />}
+        {isAdmin && <AdminPostContBtnWrapper postId={postId} />}
       </div>
     </div>
   );

@@ -60,3 +60,14 @@ export async function fetchWritePost(post: PostWriteReqType) {
 
   return result.json();
 }
+
+export async function fetchDeletePost(postId: string) {
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_baseUrl}/api/post/${postId}`,
+    {
+      method: "delete",
+    }
+  );
+
+  return result.json();
+}
