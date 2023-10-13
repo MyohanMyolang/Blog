@@ -18,7 +18,13 @@ export default async function PostPage({ params: { page = "1" } }: Props) {
   return (
     <>
       {posts !== null ? (
-        posts.map((post) => <PostCard key={post.id} postCard={post} />)
+        posts.length !== 0 ? (
+          posts.map((post) => <PostCard key={post.id} postCard={post} />)
+        ) : (
+          <NotFound>
+            <h1>포스트가 없습니다.</h1>
+          </NotFound>
+        )
       ) : (
         <NotFound>
           <h1 className="text-6xl text-red-600">서버 에러!</h1>

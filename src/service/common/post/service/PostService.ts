@@ -2,8 +2,8 @@ import "reflect-metadata";
 import { injectable, inject } from "inversify";
 import type PostRepository from "../repository/PostRepository";
 import Post_Identifier from "../inversify/PostIdentifier";
-import "server-only";
 import CheckAdminDec from "@/service/lib/decorators/ChecAdminDec";
+import "server-only";
 
 const wait = (timeToDelay: number) =>
   new Promise((resolve) => setTimeout(resolve, timeToDelay));
@@ -51,6 +51,7 @@ export default class PostService {
 
   @CheckAdminDec()
   public async deletePost(postId: string): Promise<boolean> {
+    await wait(2000);
     return this._postRepository.deletePost(parseInt(postId));
   }
 }

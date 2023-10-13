@@ -20,6 +20,7 @@ export async function GET(req: NextRequest, { params: { id } }: props) {
 }
 
 export async function DELETE(req: NextRequest, { params: { id } }: props) {
+  console.log("delete router");
   const result = await postService.deletePost(id);
   if (!result) return routeError({ msg: "찾을 수 없는 id", status: 404 });
 

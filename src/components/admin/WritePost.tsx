@@ -4,10 +4,12 @@ import { fetchWritePost } from "@/lib/post/PostMethods";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useRef, useState } from "react";
 
-type Props = {};
+type Props = {
+  post?: PostType;
+};
 
 // TODO: Change Category to Array Type
-export default function WritePost({}: Props) {
+export default function WritePost({ post }: Props) {
   const titleRef = useRef<HTMLInputElement>(null);
   const [rootCate, setRootCate] = useState<RootCategoryType | undefined>(
     undefined
@@ -35,6 +37,8 @@ export default function WritePost({}: Props) {
     setIsWriting(false);
   };
 
+  const onModify = async () => {};
+
   const onChangeRootCate = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === "dev" || e.target.value === "life")
       setRootCate(e.target.value);
@@ -47,6 +51,7 @@ export default function WritePost({}: Props) {
           className="py-4 text-4xl text-center duration-200 focus:scale-110 focus:shadow-[0_0_5px_5px] focus:shadow-cyan-300 focus:outline-none"
           placeholder="Type Title"
           ref={titleRef}
+          value={post?.title}
         />
         <div className="flex gap-4">
           <select
@@ -56,25 +61,31 @@ export default function WritePost({}: Props) {
             <option defaultValue={undefined} value={undefined}>
               Select Category
             </option>
-            <option value={"dev"}>DEV</option>
-            <option value={"life"}>LIFE</option>
+            <option selected={post?.rootCategory === "dev"} value={"dev"}>
+              DEV
+            </option>
+            <option selected={post?.rootCategory === "life"} value={"life"}>
+              LIFE
+            </option>
           </select>
           <input
             ref={categoryRef}
             placeholder="Type Category"
             className="text-center"
+            value={post.category}
           />
         </div>
         <textarea
           ref={desRef}
           placeholder="Type Des"
           className="h-screen p-4 resize-none"
+          value={post.des}
         />
         <div id="wirteBtnWrapper" className="flex flex-row-reverse gap-4">
           <button
             className="p-4 duration-300 border-2 rounded-full hover:scale-125"
             disabled={isWriting}
-            onClick={onSubmit}
+            onClick={post !== undefined ? onSubmit : onModify}
           >
             작성
           </button>

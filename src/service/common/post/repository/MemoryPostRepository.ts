@@ -3,6 +3,7 @@ import { injectable } from "inversify";
 import PostRepository from "./PostRepository";
 import { omit } from "lodash";
 import { DateTime } from "luxon";
+import { revalidateTag } from "next/cache";
 
 let posts: PostType[] = [
   {
@@ -221,14 +222,17 @@ export default class MemoryPostRepository implements PostRepository {
     posts.unshift(postData);
     return postsCount; // return post Number
   }
+
   deletePost(postId: number): boolean {
     const idx = posts.findIndex((post) => post.id === postId);
     if (idx > -1) {
-      posts.splice(idx, 1);
+      const deleted = posts.splice(idx, 1);
+      revalidateTag(`posts-${deleted[0].rootCategory}`);
       return true;
     }
     return false;
   }
+
   updatePost(postId: number) {
     throw new Error("Method not implemented.");
   }
