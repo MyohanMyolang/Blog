@@ -1,15 +1,19 @@
 "use client";
 
-import { fetchWritePost } from "@/lib/post/PostMethods";
+import {
+  fetchUpdatePost,
+  fetchPost,
+  fetchWritePost,
+} from "@/lib/post/PostMethods";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 
 type Props = {
-  post?: PostType;
+  postId?: string;
 };
 
 // TODO: Change Category to Array Type
-export default function WritePost({ post }: Props) {
+export default function WritePost({ postId }: Props) {
   const titleRef = useRef<HTMLInputElement>(null);
   const [rootCate, setRootCate] = useState<RootCategoryType | undefined>(
     undefined
@@ -19,6 +23,26 @@ export default function WritePost({ post }: Props) {
   const route = useRouter();
 
   const [isWriting, setIsWriting] = useState<boolean>(false);
+  const [post, setPost] = useState<PostType>();
+
+  useEffect(() => {
+    if (postId !== undefined) {
+      (async () => {
+        const result = await fetchPost({ id: postId });
+        setPost(result);
+      })();
+    }
+  }, [postId]);
+
+  const initPostData = () => {
+    titleRef.current!.value = post?.title ?? "";
+    categoryRef.current!.value = post?.category ?? "";
+    desRef.current!.value = post?.des ?? "";
+  };
+
+  useEffect(() => {
+    initPostData();
+  }, [desRef.current, titleRef.current, categoryRef.current, initPostData]);
 
   const onSubmit = async () => {
     const post: PostWriteReqType = {
@@ -30,14 +54,29 @@ export default function WritePost({ post }: Props) {
     setIsWriting(true);
     const result = await fetchWritePost(post);
     if (result !== null) {
-      route.push(`/post/${result}`, {});
+      route.push(`/post/${result}`);
       return null;
     }
     alert("게시글 저장에 실패하였습니다!");
     setIsWriting(false);
   };
 
-  const onModify = async () => {};
+  const onUpdate = async () => {
+    const post: PostWriteReqType = {
+      title: titleRef.current?.value ?? "",
+      category: categoryRef.current?.value ?? "",
+      des: desRef.current?.value ?? "",
+      rootCategory: rootCate!,
+    };
+    setIsWriting(true);
+    const result = await fetchUpdatePost(post, postId!);
+    if (result !== null) {
+      route.push(`/post/${postId}`);
+      return null;
+    }
+    alert("게시글 수정에 실패하였습니다!");
+    setIsWriting(false);
+  };
 
   const onChangeRootCate = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === "dev" || e.target.value === "life")
@@ -51,43 +90,36 @@ export default function WritePost({ post }: Props) {
           className="py-4 text-4xl text-center duration-200 focus:scale-110 focus:shadow-[0_0_5px_5px] focus:shadow-cyan-300 focus:outline-none"
           placeholder="Type Title"
           ref={titleRef}
-          value={post?.title}
         />
         <div className="flex gap-4">
           <select
             onChange={onChangeRootCate}
             className="p-4 border-2 rounded-lg focus:border-cyan-600"
+            defaultValue={post?.rootCategory}
+            key={post?.rootCategory}
           >
-            <option defaultValue={undefined} value={undefined}>
-              Select Category
-            </option>
-            <option selected={post?.rootCategory === "dev"} value={"dev"}>
-              DEV
-            </option>
-            <option selected={post?.rootCategory === "life"} value={"life"}>
-              LIFE
-            </option>
+            <option value={undefined}>Select Category</option>
+            <option value={"dev"}>DEV</option>
+            <option value={"life"}>LIFE</option>
           </select>
           <input
             ref={categoryRef}
             placeholder="Type Category"
             className="text-center"
-            value={post.category}
           />
         </div>
         <textarea
           ref={desRef}
           placeholder="Type Des"
           className="h-screen p-4 resize-none"
-          value={post.des}
         />
         <div id="wirteBtnWrapper" className="flex flex-row-reverse gap-4">
           <button
             className="p-4 duration-300 border-2 rounded-full hover:scale-125"
             disabled={isWriting}
-            onClick={post !== undefined ? onSubmit : onModify}
+            onClick={postId === undefined ? onSubmit : onUpdate}
           >
-            작성
+            {postId === undefined ? "작성" : "수정"}
           </button>
         </div>
       </div>

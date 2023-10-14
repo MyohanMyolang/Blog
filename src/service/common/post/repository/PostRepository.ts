@@ -20,5 +20,5 @@ export default interface PostRepository {
 
   deletePost(postId: number): boolean;
 
-  updatePost(postId: number, data: PostType): any;
+  updatePost(postId: number, data: PostWriteReqType): any;
 }

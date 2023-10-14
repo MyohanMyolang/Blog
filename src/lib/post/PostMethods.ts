@@ -41,15 +41,19 @@ export async function fetchCarouselPosts({
 }
 
 export async function fetchSearchPosts(props: { searchText: string }) {
-  const result = await fetch(
-    `${process.env.NEXT_PUBLIC_baseUrl}/api/posts/search`,
-    {
-      method: "post",
-      body: JSON.stringify(props),
-    }
-  );
-
-  return result.json();
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_baseUrl}/api/posts/search`,
+      {
+        method: "post",
+        body: JSON.stringify(props),
+      }
+    );
+    return result.json();
+  } catch (e) {
+    console.log("씨이발");
+    return null;
+  }
 }
 
 export async function fetchWritePost(post: PostWriteReqType) {
@@ -70,4 +74,14 @@ export async function fetchDeletePost(postId: string) {
   );
 
   return result.json();
+}
+
+export async function fetchUpdatePost(post: PostWriteReqType, postId: string) {
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_baseUrl}/api/post/${postId}`,
+    {
+      method: "put",
+      body: JSON.stringify(post),
+    }
+  );
 }

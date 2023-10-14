@@ -31,18 +31,14 @@ export default function SearchBar({ isPost }: Props) {
   useEffect(() => {
     // fetch Items
     if (debouncedValue !== "") {
-      try {
-        // ServerAction Exception
-        setPosts(undefined);
-        setIsSearching(true);
-        (async () => {
-          const result = await fetchSearchPosts({ searchText: debouncedValue });
-          setPosts(result);
-          setIsSearching(false);
-        })();
-      } catch (error) {
-        console.log(error);
-      }
+      // ServerAction Exception
+      setPosts(undefined);
+      setIsSearching(true);
+      (async () => {
+        const result = await fetchSearchPosts({ searchText: debouncedValue });
+        setPosts(result);
+        setIsSearching(false);
+      })();
     }
   }, [debouncedValue]);
 

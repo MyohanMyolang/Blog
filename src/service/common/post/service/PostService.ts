@@ -54,4 +54,9 @@ export default class PostService {
     await wait(2000);
     return this._postRepository.deletePost(parseInt(postId));
   }
+
+  @CheckAdminDec()
+  public async updatePost(postId: string, data: PostWriteReqType) {
+    return this._postRepository.updatePost(parseInt(postId), data);
+  }
 }

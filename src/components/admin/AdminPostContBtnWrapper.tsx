@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import ContMenuBtn from "../csr/ContMenuBtn";
-import { fetchDeletePost } from "@/lib/post/PostMethods";
+import { fetchDeletePost, fetchUpdatePost } from "@/lib/post/PostMethods";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -14,20 +14,26 @@ export default function AdminPostContBtnWrapper({ postId }: Props) {
   const [pending, setPending] = useState<boolean>(false);
 
   const onDeletePost = async () => {
-    setPending(true);
-    const result = await fetchDeletePost(postId);
-    if (result) {
-      alert("삭제되었습니다.");
-      route.push("/");
-      return;
+    if (confirm("정말로 삭제하시겠습니까?")) {
+      setPending(true);
+      const result = await fetchDeletePost(postId);
+      if (result) {
+        alert("삭제되었습니다.");
+        route.push("/");
+        return;
+      }
+      setPending(false);
+      alert("삭제 실패");
     }
-    setPending(false);
-    alert("삭제 실패");
+  };
+
+  const onUpdatePost = async () => {
+    route.push(`/write/${postId}`);
   };
 
   return (
     <div className="flex gap-4 mb-4">
-      <ContMenuBtn>수정</ContMenuBtn>
+      <ContMenuBtn onClick={onUpdatePost}>수정</ContMenuBtn>
       <ContMenuBtn pending={pending} onClick={onDeletePost}>
         삭제
       </ContMenuBtn>

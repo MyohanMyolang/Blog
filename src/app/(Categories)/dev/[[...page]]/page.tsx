@@ -5,13 +5,13 @@ import React from "react";
 
 type Props = {
   params: {
-    page: string;
+    page: string[];
   };
 };
 
-export default async function PostPage({ params: { page = "1" } }: Props) {
+export default async function PostPage({ params: { page = ["1"] } }: Props) {
   const posts: PostCardType[] | null = await fetchPosts({
-    page,
+    page: page[0],
     rootCate: "dev",
   });
 

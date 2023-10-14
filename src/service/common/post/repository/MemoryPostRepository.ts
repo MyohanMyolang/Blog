@@ -233,7 +233,13 @@ export default class MemoryPostRepository implements PostRepository {
     return false;
   }
 
-  updatePost(postId: number) {
-    throw new Error("Method not implemented.");
+  updatePost(postId: number, data: PostWriteReqType) {
+    const idx = posts.findIndex((post) => post.id === postId);
+    if (idx > -1) {
+      posts[idx] = { ...posts[idx], ...data };
+      revalidateTag(`posts-${posts[idx].rootCategory}`);
+      return true;
+    }
+    return false;
   }
 }
