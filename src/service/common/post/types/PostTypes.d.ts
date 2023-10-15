@@ -2,7 +2,7 @@ type PostType = {
   id: number;
   title: string;
   des: string;
-  rootCategory: RootCategoryType;
+  RCate: RootCategoryType;
   category: string;
   date: string;
   featured: boolean;
@@ -10,7 +10,7 @@ type PostType = {
   imgSrc?: string;
 };
 
-type PostCardType = Omit<PostType, "featured" | "rootCategory">;
+type PostCardType = Omit<PostType, "featured" | "RCate">;
 
 type RootCategoryType = "dev" | "life";
 

@@ -8,7 +8,7 @@ import { revalidateTag } from "next/cache";
 let posts: PostType[] = [
   {
     id: 1,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -17,7 +17,7 @@ let posts: PostType[] = [
   },
   {
     id: 2,
-    rootCategory: "life",
+    RCate: "life",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -26,7 +26,7 @@ let posts: PostType[] = [
   },
   {
     id: 3,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -35,7 +35,7 @@ let posts: PostType[] = [
   },
   {
     id: 4,
-    rootCategory: "life",
+    RCate: "life",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -44,7 +44,7 @@ let posts: PostType[] = [
   },
   {
     id: 5,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -53,7 +53,7 @@ let posts: PostType[] = [
   },
   {
     id: 6,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -62,7 +62,7 @@ let posts: PostType[] = [
   },
   {
     id: 7,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -71,7 +71,7 @@ let posts: PostType[] = [
   },
   {
     id: 8,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -80,7 +80,7 @@ let posts: PostType[] = [
   },
   {
     id: 9,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -89,7 +89,7 @@ let posts: PostType[] = [
   },
   {
     id: 10,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -98,7 +98,7 @@ let posts: PostType[] = [
   },
   {
     id: 11,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -107,7 +107,7 @@ let posts: PostType[] = [
   },
   {
     id: 12,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -116,7 +116,7 @@ let posts: PostType[] = [
   },
   {
     id: 13,
-    rootCategory: "life",
+    RCate: "life",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -125,7 +125,7 @@ let posts: PostType[] = [
   },
   {
     id: 14,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -134,7 +134,7 @@ let posts: PostType[] = [
   },
   {
     id: 15,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -143,7 +143,7 @@ let posts: PostType[] = [
   },
   {
     id: 16,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -152,7 +152,7 @@ let posts: PostType[] = [
   },
   {
     id: 17,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -161,9 +161,6 @@ let posts: PostType[] = [
   },
 ];
 
-//
-type rootCategories = "dev" | "life";
-
 let postsCount = posts.length;
 
 @injectable()
@@ -171,7 +168,7 @@ export default class MemoryPostRepository implements PostRepository {
   constructor() {}
 
   private postConvertPostCard(post: PostType) {
-    return omit(post, ["featured", "rootCategory"]);
+    return omit(post, ["featured", "RCate"]);
   }
 
   getPosts({
@@ -182,11 +179,9 @@ export default class MemoryPostRepository implements PostRepository {
     rootCategory: RootCategoryType;
   }): PostCardType[] {
     return posts
-      .filter((post) => post.rootCategory === rootCategory)
+      .filter((post) => post.RCate === rootCategory)
       .slice((page - 1) * 10, page * 10)
-      .map((post) => {
-        return this.postConvertPostCard(post);
-      });
+      .map((post) => this.postConvertPostCard(post));
   }
 
   public getRecentlyPosts(postNum: number): PostCardType[] {
@@ -227,7 +222,7 @@ export default class MemoryPostRepository implements PostRepository {
     const idx = posts.findIndex((post) => post.id === postId);
     if (idx > -1) {
       const deleted = posts.splice(idx, 1);
-      revalidateTag(`posts-${deleted[0].rootCategory}`);
+      revalidateTag(`posts-${deleted[0].RCate}`);
       return true;
     }
     return false;
@@ -236,8 +231,12 @@ export default class MemoryPostRepository implements PostRepository {
   updatePost(postId: number, data: PostWriteReqType) {
     const idx = posts.findIndex((post) => post.id === postId);
     if (idx > -1) {
+      if (posts[idx].RCate !== data.RCate) {
+        revalidateTag(`posts-${data.RCate}`);
+        revalidateTag(`posts-${posts[idx].RCate}`);
+        revalidateTag(`post-${postId}`);
+      }
       posts[idx] = { ...posts[idx], ...data };
-      revalidateTag(`posts-${posts[idx].rootCategory}`);
       return true;
     }
     return false;

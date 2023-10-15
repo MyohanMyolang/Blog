@@ -1,3 +1,5 @@
+import { revalidateTag } from "next/cache";
+
 export async function fetchPosts({ page, rootCate }: PostsReqType) {
   const result = await fetch(
     `http://localhost:3000/api/posts?page=${page}&rootcate=${rootCate}`,
@@ -51,7 +53,6 @@ export async function fetchSearchPosts(props: { searchText: string }) {
     );
     return result.json();
   } catch (e) {
-    console.log("씨이발");
     return null;
   }
 }
@@ -84,4 +85,6 @@ export async function fetchUpdatePost(post: PostWriteReqType, postId: string) {
       body: JSON.stringify(post),
     }
   );
+
+  return result.json();
 }

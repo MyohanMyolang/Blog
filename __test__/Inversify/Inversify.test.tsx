@@ -7,7 +7,7 @@ import { inject } from "inversify";
 let posts: PostType[] = [
   {
     id: 1,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -16,7 +16,7 @@ let posts: PostType[] = [
   },
   {
     id: 2,
-    rootCategory: "life",
+    RCate: "life",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -25,7 +25,7 @@ let posts: PostType[] = [
   },
   {
     id: 3,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -34,7 +34,7 @@ let posts: PostType[] = [
   },
   {
     id: 4,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -43,7 +43,7 @@ let posts: PostType[] = [
   },
   {
     id: 5,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -52,7 +52,7 @@ let posts: PostType[] = [
   },
   {
     id: 6,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -61,7 +61,7 @@ let posts: PostType[] = [
   },
   {
     id: 7,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -70,7 +70,7 @@ let posts: PostType[] = [
   },
   {
     id: 8,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -79,7 +79,7 @@ let posts: PostType[] = [
   },
   {
     id: 9,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -88,7 +88,7 @@ let posts: PostType[] = [
   },
   {
     id: 10,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -97,7 +97,7 @@ let posts: PostType[] = [
   },
   {
     id: 11,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -106,7 +106,7 @@ let posts: PostType[] = [
   },
   {
     id: 12,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -115,7 +115,7 @@ let posts: PostType[] = [
   },
   {
     id: 13,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -124,7 +124,7 @@ let posts: PostType[] = [
   },
   {
     id: 14,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -133,7 +133,7 @@ let posts: PostType[] = [
   },
   {
     id: 15,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -142,7 +142,7 @@ let posts: PostType[] = [
   },
   {
     id: 16,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",
@@ -151,7 +151,7 @@ let posts: PostType[] = [
   },
   {
     id: 17,
-    rootCategory: "dev",
+    RCate: "dev",
     category: "tempCate1",
     date: "2023-07-22",
     title: "tempTitle",

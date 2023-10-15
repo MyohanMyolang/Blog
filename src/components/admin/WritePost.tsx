@@ -42,14 +42,14 @@ export default function WritePost({ postId }: Props) {
 
   useEffect(() => {
     initPostData();
-  }, [desRef.current, titleRef.current, categoryRef.current, initPostData]);
+  }, [desRef.current, titleRef.current, categoryRef.current]);
 
   const onSubmit = async () => {
     const post: PostWriteReqType = {
       title: titleRef.current?.value ?? "",
       category: categoryRef.current?.value ?? "",
       des: desRef.current?.value ?? "",
-      rootCategory: rootCate!,
+      RCate: rootCate!,
     };
     setIsWriting(true);
     const result = await fetchWritePost(post);
@@ -66,7 +66,7 @@ export default function WritePost({ postId }: Props) {
       title: titleRef.current?.value ?? "",
       category: categoryRef.current?.value ?? "",
       des: desRef.current?.value ?? "",
-      rootCategory: rootCate!,
+      RCate: rootCate!,
     };
     setIsWriting(true);
     const result = await fetchUpdatePost(post, postId!);
@@ -95,8 +95,8 @@ export default function WritePost({ postId }: Props) {
           <select
             onChange={onChangeRootCate}
             className="p-4 border-2 rounded-lg focus:border-cyan-600"
-            defaultValue={post?.rootCategory}
-            key={post?.rootCategory}
+            defaultValue={post?.RCate}
+            key={post?.RCate}
           >
             <option value={undefined}>Select Category</option>
             <option value={"dev"}>DEV</option>

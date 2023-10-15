@@ -32,6 +32,5 @@ export async function PUT(req: NextRequest, { params: { id } }: props) {
   const result = await postService.updatePost(id, body);
   if (!result) return routeError({ msg: "찾을 수 없는 id", status: 404 });
 
-  revalidateTag(`post-${id}`);
   return NextResponse.json(result);
 }
