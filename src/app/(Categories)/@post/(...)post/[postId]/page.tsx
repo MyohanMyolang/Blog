@@ -22,7 +22,7 @@ export default async function InterceptPostPage({ params: { postId } }: Props) {
       <PostViewer post={post} />
 
       {isAdmin && (
-        <div className="flex flex-row-reverse">
+        <div className="flex flex-row-reverse items-center border-t-2 border-white">
           <AdminPostContBtnWrapper postId={postId} />
         </div>
       )}

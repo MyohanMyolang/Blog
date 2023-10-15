@@ -10,7 +10,7 @@ type PostType = {
   imgSrc?: string;
 };
 
-type PostCardType = Omit<PostType, "featured" | "RCate">;
+type PostCardType = Omit<PostType, "featured" | "RCate" | "des">;
 
 type RootCategoryType = "dev" | "life";
 

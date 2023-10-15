@@ -5,6 +5,7 @@ import {
   fetchPost,
   fetchWritePost,
 } from "@/lib/post/PostMethods";
+import MDEditor, { ContextStore } from "@uiw/react-md-editor";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 
@@ -19,11 +20,11 @@ export default function WritePost({ postId }: Props) {
     undefined
   );
   const categoryRef = useRef<HTMLInputElement>(null);
-  const desRef = useRef<HTMLTextAreaElement>(null);
   const route = useRouter();
 
   const [isWriting, setIsWriting] = useState<boolean>(false);
   const [post, setPost] = useState<PostType>();
+  const [des, setDes] = useState<string>("");
 
   useEffect(() => {
     if (postId !== undefined) {
@@ -37,18 +38,18 @@ export default function WritePost({ postId }: Props) {
   const initPostData = () => {
     titleRef.current!.value = post?.title ?? "";
     categoryRef.current!.value = post?.category ?? "";
-    desRef.current!.value = post?.des ?? "";
+    setDes(post?.des ?? "");
   };
 
   useEffect(() => {
     initPostData();
-  }, [desRef.current, titleRef.current, categoryRef.current]);
+  }, [titleRef.current, categoryRef.current]);
 
   const onSubmit = async () => {
     const post: PostWriteReqType = {
       title: titleRef.current?.value ?? "",
       category: categoryRef.current?.value ?? "",
-      des: desRef.current?.value ?? "",
+      des: des,
       RCate: rootCate!,
     };
     setIsWriting(true);
@@ -65,7 +66,7 @@ export default function WritePost({ postId }: Props) {
     const post: PostWriteReqType = {
       title: titleRef.current?.value ?? "",
       category: categoryRef.current?.value ?? "",
-      des: desRef.current?.value ?? "",
+      des: des,
       RCate: rootCate!,
     };
     setIsWriting(true);
@@ -81,6 +82,15 @@ export default function WritePost({ postId }: Props) {
   const onChangeRootCate = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === "dev" || e.target.value === "life")
       setRootCate(e.target.value);
+  };
+
+  const onTypeMD = (
+    value?: string,
+    e?: ChangeEvent<HTMLTextAreaElement>,
+    state?: ContextStore
+  ) => {
+    console.log(des);
+    setDes(value ?? "");
   };
 
   return (
@@ -108,14 +118,10 @@ export default function WritePost({ postId }: Props) {
             className="text-center"
           />
         </div>
-        <textarea
-          ref={desRef}
-          placeholder="Type Des"
-          className="h-screen p-4 resize-none"
-        />
+        <MDEditor height={800} value={des} onChange={onTypeMD} />
         <div id="wirteBtnWrapper" className="flex flex-row-reverse gap-4">
           <button
-            className="p-4 duration-300 border-2 rounded-full hover:scale-125"
+            className="p-2 transition transform active:translate-y-2 duration:300 hover:-translate-y-2 hover:border-b-2 hover:border-b-cyan-300"
             disabled={isWriting}
             onClick={postId === undefined ? onSubmit : onUpdate}
           >

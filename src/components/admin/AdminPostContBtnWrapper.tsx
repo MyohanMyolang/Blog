@@ -32,7 +32,7 @@ export default function AdminPostContBtnWrapper({ postId }: Props) {
   };
 
   return (
-    <div className="flex gap-4 mb-4">
+    <div className="flex gap-4 my-4">
       <ContMenuBtn onClick={onUpdatePost}>수정</ContMenuBtn>
       <ContMenuBtn pending={pending} onClick={onDeletePost}>
         삭제

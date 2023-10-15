@@ -29,16 +29,16 @@ export default function PostCard({ postCard }: Props) {
           <h4 className="">{postCard.date}</h4>
         </div>
         <div className="hidden row-start-2 pr-4 md:block">
-          {postCard.des.length > 150
-            ? `${postCard.des.slice(0, 150)}...`
-            : postCard.des}
+          {(postCard.intro?.length ?? 0) > 150
+            ? `${postCard.intro?.slice(0, 150)}...`
+            : postCard.intro ?? ""}
         </div>
         <h4 className="text-gray-500">{postCard.category}</h4>
       </div>
       <div className="row-start-2 px-4 pt-4 pl-4 md:hidden">
-        {postCard.des.length > 150
-          ? `${postCard.des.slice(0, 150)}...`
-          : postCard.des}
+        {(postCard.intro?.length ?? 0) > 150
+          ? `${postCard.intro?.slice(0, 150)}...`
+          : postCard.intro ?? ""}
       </div>
     </Link>
   );

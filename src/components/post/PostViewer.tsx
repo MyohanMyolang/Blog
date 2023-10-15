@@ -7,7 +7,7 @@ type Props = {
 
 export default function PostViewer({ post }: Props) {
   return (
-    <>
+    <div className="py-4">
       <div className="grid grid-cols-3 pb-4 mb-4 align-middle border-b-2 border-b-black dark:border-b-white">
         <div className="col-start-2 text-4xl font-bold text-center">
           {post.title}
@@ -20,6 +20,6 @@ export default function PostViewer({ post }: Props) {
       <div className="prose dark:prose-invert">
         <MDXRemote source={post.des} />
       </div>
-    </>
+    </div>
   );
 }

@@ -168,7 +168,7 @@ export default class MemoryPostRepository implements PostRepository {
   constructor() {}
 
   private postConvertPostCard(post: PostType) {
-    return omit(post, ["featured", "RCate"]);
+    return omit(post, ["featured", "RCate", "des"]);
   }
 
   getPosts({
