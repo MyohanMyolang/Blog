@@ -84,12 +84,7 @@ export default function WritePost({ postId }: Props) {
       setRootCate(e.target.value);
   };
 
-  const onTypeMD = (
-    value?: string,
-    e?: ChangeEvent<HTMLTextAreaElement>,
-    state?: ContextStore
-  ) => {
-    console.log(des);
+  const onTypeMD = (value?: string) => {
     setDes(value ?? "");
   };
 
@@ -128,7 +123,48 @@ export default function WritePost({ postId }: Props) {
             {postId === undefined ? "작성" : "수정"}
           </button>
         </div>
+        {/* Animation을 이용하여 아래에서 올라오는 기능 구현 / intro와 image를 넣을 수 있는 창을 만든다. */}
       </div>
     </>
   );
 }
+
+/*
+TODO: create Toolbar for local Image Upload
+  - 버튼 클릭 시 Dialog를 띄운 후 파일을 가져오기
+  - 이후 가져온 데이터를 서버에 전송
+  - 서버에서 받아온 url주소 입력 시키기
+    - ![image](url)
+  - url은 Image 변수에 등록시키도록 한다. // 썸네일을 따로 지정하지 않았을 때, 가장 처음 upload한 이미지 사용하기 위해.
+import React, { useContext } from "react";
+import MDEditor, { commands } from "@uiw/react-md-editor";
+
+const help = {
+  name: "help",
+  keyCommand: "help",
+  buttonProps: { "aria-label": "Insert help" },
+  icon: (
+    <svg viewBox="0 0 16 16" width="12px" height="12px">
+      <path
+        d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8Zm.9 13H7v-1.8h1.9V13Zm-.1-3.6v.5H7.1v-.6c.2-2.1 2-1.9 1.9-3.2.1-.7-.3-1.1-1-1.1-.8 0-1.2.7-1.2 1.6H5c0-1.7 1.2-3 2.9-3 2.3 0 3 1.4 3 2.3.1 2.3-1.9 2-2.1 3.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  execute: (state, api) => {
+    window.open("https://www.markdownguide.org/basic-syntax/", "_blank");
+  }
+};
+
+export default function App() {
+  const [value, setValue] = React.useState("**Hello world!!!**");
+  return (
+    <MDEditor
+      value={value}
+      preview="edit"
+      commands={[...commands.getCommands(), help]}
+      onChange={(val) => setValue(val)}
+    />
+  );
+}
+*/

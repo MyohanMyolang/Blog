@@ -241,4 +241,11 @@ export default class MemoryPostRepository implements PostRepository {
     }
     return false;
   }
+
+  searchPost({ searchText }: PostSearchType): PostCardType[] {
+    if (true /* title || des || category */) {
+    }
+
+    return [];
+  }
 }

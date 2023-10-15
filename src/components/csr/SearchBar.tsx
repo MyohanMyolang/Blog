@@ -42,6 +42,8 @@ export default function SearchBar({ isPost }: Props) {
     }
   }, [debouncedValue]);
 
+  // Craete infinite Scroll
+
   return (
     <>
       <div className="flex flex-row-reverse items-center my-4">
