@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { injectable, inject } from "inversify";
 import type PostRepository from "../repository/PostRepository";
 import Post_Identifier from "../inversify/PostIdentifier";
-import CheckAdminDec from "@/service/lib/decorators/ChecAdminDec";
+import CheckAdminDec from "@/service/lib/decorators/Decorators";
 import "server-only";
 
 const wait = (timeToDelay: number) =>
@@ -43,7 +43,7 @@ export default class PostService {
     return this._postRepository.getPost(parseInt(postId));
   }
 
-  public async searchPost({ searchText }: { searchText: string }) {}
+  public async searchPost({ searchText }: PostSearchType) {}
 
   @CheckAdminDec()
   public async writePost(post: PostWriteReqType): Promise<number> {

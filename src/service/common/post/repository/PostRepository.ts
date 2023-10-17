@@ -21,4 +21,6 @@ export default interface PostRepository {
   deletePost(postId: number): boolean;
 
   updatePost(postId: number, data: PostWriteReqType): any;
+
+  searchPost({ searchText }: PostSearchType): PostCardType[];
 }

@@ -4,6 +4,7 @@ import PostRepository from "./PostRepository";
 import { omit } from "lodash";
 import { DateTime } from "luxon";
 import { revalidateTag } from "next/cache";
+import { ConvPostToPC } from "@/service/lib/decorators/Decorators";
 
 let posts: PostType[] = [
   {
@@ -167,10 +168,7 @@ let postsCount = posts.length;
 export default class MemoryPostRepository implements PostRepository {
   constructor() {}
 
-  private postConvertPostCard(post: PostType) {
-    return omit(post, ["featured", "RCate", "des"]);
-  }
-
+  @ConvPostToPC()
   getPosts({
     page,
     rootCategory,
@@ -180,27 +178,22 @@ export default class MemoryPostRepository implements PostRepository {
   }): PostCardType[] {
     return posts
       .filter((post) => post.RCate === rootCategory)
-      .slice((page - 1) * 10, page * 10)
-      .map((post) => this.postConvertPostCard(post));
+      .slice((page - 1) * 10, page * 10);
   }
 
+  @ConvPostToPC()
   public getRecentlyPosts(postNum: number): PostCardType[] {
     const length = postsCount;
     const result: PostType[] = posts.slice(
       postNum >= length ? 0 : length - postNum
     );
 
-    return result.map((post) => {
-      return this.postConvertPostCard(post);
-    });
+    return result;
   }
 
+  @ConvPostToPC()
   getFeaturedPosts(): PostCardType[] {
-    return posts
-      .filter((item, index) => item.featured)
-      .map((post) => {
-        return this.postConvertPostCard(post);
-      });
+    return posts.filter((item, index) => item.featured);
   }
 
   getPost(postId: number): PostType | null {
@@ -242,10 +235,16 @@ export default class MemoryPostRepository implements PostRepository {
     return false;
   }
 
+  @ConvPostToPC()
   searchPost({ searchText }: PostSearchType): PostCardType[] {
-    if (true /* title || des || category */) {
-    }
+    const foundPosts: PostType[] = posts.filter((item) => {
+      return (
+        item.title.includes(searchText) ||
+        item.des.includes(searchText) ||
+        item.category.includes(searchText)
+      );
+    });
 
-    return [];
+    return foundPosts;
   }
 }
