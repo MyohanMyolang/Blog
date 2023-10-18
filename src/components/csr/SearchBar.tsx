@@ -4,7 +4,8 @@ import useDebounce from "@/hooks/useDebounce";
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import PostCard from "../common/PostCard";
 import PostCardSkeleton from "../common/PostCardSkeleton";
-import { fetchSearchPosts } from "@/lib/post/PostMethods";
+import { fetchSearchPosts } from "@/lib/post/PostFetchMethods";
+import NotFound from "./NotFound";
 
 type Props = {
   isPost: boolean;
@@ -35,9 +36,13 @@ export default function SearchBar({ isPost }: Props) {
       setPosts(undefined);
       setIsSearching(true);
       (async () => {
-        const result = await fetchSearchPosts({ searchText: debouncedValue });
+        const result = await fetchSearchPosts({
+          searchText: debouncedValue,
+          page: 1,
+        });
         setPosts(result);
         setIsSearching(false);
+        console.log(result);
       })();
     }
   }, [debouncedValue]);
@@ -65,7 +70,7 @@ export default function SearchBar({ isPost }: Props) {
             {isSearching ? "검색중..." : "검색 결과"}
           </div>
           {posts === undefined && <PostCardSkeleton />}
-          {posts === null && <p>Not Found Posts</p>}
+          {posts === null && <NotFound>Not Found Post!</NotFound>}
           {posts?.map((post) => (
             <PostCard key={post.id} postCard={post} />
           ))}

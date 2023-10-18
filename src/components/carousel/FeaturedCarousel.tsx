@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import CarouselPostCard from "../common/CarouselPostCard";
 import MultiCarousel from "./MultiCarousel";
-import { fetchCarouselPosts } from "@/lib/post/PostMethods";
+import { fetchCarouselPosts } from "@/lib/post/server/PostFetchMethods";
 
 type Props = {};
 

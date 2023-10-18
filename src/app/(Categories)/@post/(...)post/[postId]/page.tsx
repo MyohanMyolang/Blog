@@ -2,7 +2,7 @@ import AdminPostContBtnWrapper from "@/components/admin/AdminPostContBtnWrapper"
 import Modal from "@/components/csr/Modal";
 import PostViewer from "@/components/post/PostViewer";
 import CheckAdmin from "@/lib/CheckAdmin";
-import { fetchPost } from "@/lib/post/PostMethods";
+import { fetchPost } from "@/lib/post/PostFetchMethods";
 import { notFound } from "next/navigation";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import { fetchPost } from "@/lib/post/PostMethods";
+import { fetchPost } from "@/lib/post/PostFetchMethods";
 import { notFound } from "next/navigation";
 
 type Props = {

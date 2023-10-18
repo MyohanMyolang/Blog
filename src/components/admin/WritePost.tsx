@@ -4,7 +4,7 @@ import {
   fetchUpdatePost,
   fetchPost,
   fetchWritePost,
-} from "@/lib/post/PostMethods";
+} from "@/lib/post/PostFetchMethods";
 import MDEditor, { ContextStore } from "@uiw/react-md-editor";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";

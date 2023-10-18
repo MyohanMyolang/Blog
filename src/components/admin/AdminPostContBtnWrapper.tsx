@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import ContMenuBtn from "../csr/ContMenuBtn";
-import { fetchDeletePost, fetchUpdatePost } from "@/lib/post/PostMethods";
+import { fetchDeletePost, fetchUpdatePost } from "@/lib/post/PostFetchMethods";
 import { useRouter } from "next/navigation";
 
 type Props = {

@@ -20,7 +20,9 @@ export function ConvPostToPC() {
 
     des.value = function (...args: any) {
       const posts: PostType[] = originMethod.apply(this, args);
-      return posts.map((item) => omit(item, ["featured", "RCate", "des"]));
+      return posts !== null
+        ? posts.map((item) => omit(item, ["featured", "RCate", "des"]))
+        : null;
     };
   };
 }

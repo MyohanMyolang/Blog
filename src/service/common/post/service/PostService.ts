@@ -43,7 +43,9 @@ export default class PostService {
     return this._postRepository.getPost(parseInt(postId));
   }
 
-  public async searchPost({ searchText }: PostSearchType) {}
+  public async searchPost(searchData: PostSearchType) {
+    return this._postRepository.searchPost(searchData);
+  }
 
   @CheckAdminDec()
   public async writePost(post: PostWriteReqType): Promise<number> {

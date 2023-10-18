@@ -1,6 +1,6 @@
 import PostCard from "@/components/common/PostCard";
 import NotFound from "@/components/csr/NotFound";
-import { fetchPosts } from "@/lib/post/PostMethods";
+import { fetchPosts } from "@/lib/post/server/PostFetchMethods";
 import React from "react";
 
 type Props = {

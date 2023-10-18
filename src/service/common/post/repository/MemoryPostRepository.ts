@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import { injectable } from "inversify";
 import PostRepository from "./PostRepository";
-import { omit } from "lodash";
 import { DateTime } from "luxon";
 import { revalidateTag } from "next/cache";
 import { ConvPostToPC } from "@/service/lib/decorators/Decorators";
@@ -236,15 +235,17 @@ export default class MemoryPostRepository implements PostRepository {
   }
 
   @ConvPostToPC()
-  searchPost({ searchText }: PostSearchType): PostCardType[] {
+  searchPost({ searchText, page }: PostSearchType): PostCardType[] | null {
     const foundPosts: PostType[] = posts.filter((item) => {
       return (
-        item.title.includes(searchText) ||
-        item.des.includes(searchText) ||
-        item.category.includes(searchText)
+        item.title.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.des.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchText.toLowerCase())
       );
     });
 
-    return foundPosts;
+    return foundPosts.length !== 0
+      ? foundPosts.slice((page - 1) * 10, page * 10)
+      : null;
   }
 }

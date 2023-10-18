@@ -22,5 +22,5 @@ export default interface PostRepository {
 
   updatePost(postId: number, data: PostWriteReqType): any;
 
-  searchPost({ searchText }: PostSearchType): PostCardType[];
+  searchPost(searchData: PostSearchType): PostCardType[] | null;
 }

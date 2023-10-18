@@ -33,4 +33,5 @@ type PostWriteReqType = Omit<PostType, "featured" | "id" | "date">;
 
 type PostSearchType = {
   searchText: string;
+  page: number;
 };

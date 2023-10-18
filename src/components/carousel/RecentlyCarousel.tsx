@@ -1,7 +1,7 @@
 import React from "react";
 import MultiCarousel from "./MultiCarousel";
 import CarouselPostCard from "../common/CarouselPostCard";
-import { fetchCarouselPosts } from "@/lib/post/PostMethods";
+import { fetchCarouselPosts } from "@/lib/post/server/PostFetchMethods";
 
 type Props = {};
 
