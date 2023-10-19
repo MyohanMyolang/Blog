@@ -6,6 +6,7 @@ import PostCard from "../common/PostCard";
 import PostCardSkeleton from "../common/PostCardSkeleton";
 import { fetchSearchPosts } from "@/lib/post/PostFetchMethods";
 import NotFound from "./NotFound";
+import InfiScrollTrigger from "./InfiScrollTrigger";
 
 type Props = {
   isPost: boolean;
@@ -29,21 +30,27 @@ export default function SearchBar({ isPost }: Props) {
     setSearchText(e.target.value);
   };
 
+  const getSearchPosts = async (page: number) => {
+    const result = await fetchSearchPosts({
+      searchText: debouncedValue,
+      page,
+    });
+    console.log(result);
+    console.log(posts);
+    if (result !== undefined && result !== null) {
+      setPosts([...(posts ?? []), ...result]);
+    } else {
+    }
+    setIsSearching(false);
+    return result?.length;
+  };
   useEffect(() => {
     // fetch Items
     if (debouncedValue !== "") {
       // ServerAction Exception
-      setPosts(undefined);
+      setPosts([]);
       setIsSearching(true);
-      (async () => {
-        const result = await fetchSearchPosts({
-          searchText: debouncedValue,
-          page: 1,
-        });
-        setPosts(result);
-        setIsSearching(false);
-        console.log(result);
-      })();
+      getSearchPosts(1);
     }
   }, [debouncedValue]);
 
@@ -74,6 +81,12 @@ export default function SearchBar({ isPost }: Props) {
           {posts?.map((post) => (
             <PostCard key={post.id} postCard={post} />
           ))}
+          {posts !== null && posts?.length !== 0 && (
+            <InfiScrollTrigger
+              setIsSearching={setIsSearching}
+              getSearchPosts={getSearchPosts}
+            />
+          )}
         </>
       )}
     </>
