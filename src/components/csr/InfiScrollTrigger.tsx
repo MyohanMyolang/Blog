@@ -5,11 +5,13 @@ import PostCardSkeleton from "../common/PostCardSkeleton";
 type Props = {
   setIsSearching: Dispatch<SetStateAction<boolean>>;
   getSearchPosts: (page: number) => Promise<number>;
+  searchText: string;
 };
 
 export default function InfiScrollTrigger({
   setIsSearching,
   getSearchPosts,
+  searchText,
 }: Props) {
   const [page, setPage] = useState<number>(1);
   const [ref, inView] = useInView();
@@ -28,13 +30,13 @@ export default function InfiScrollTrigger({
 
   useEffect(() => {
     if (inView) {
-      console.log("inView nextPage : ", page + 1);
       const next = page + 1;
       setIsSearching(true);
       setDuringSearch(true);
       searchMorePosts(next);
+      setIsEnd(false);
     }
-  }, [inView]);
+  }, [inView, searchText]);
 
   return (
     <>

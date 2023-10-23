@@ -36,10 +36,12 @@ export default function SearchBar({ isPost }: Props) {
       page,
     });
     console.log(result);
-    console.log(posts);
     if (result !== undefined && result !== null) {
-      setPosts([...(posts ?? []), ...result]);
+      page !== 1
+        ? setPosts([...(posts ?? []), ...result])
+        : setPosts([...result]);
     } else {
+      setPosts(result);
     }
     setIsSearching(false);
     return result?.length;
@@ -48,7 +50,7 @@ export default function SearchBar({ isPost }: Props) {
     // fetch Items
     if (debouncedValue !== "") {
       // ServerAction Exception
-      setPosts([]);
+      setPosts(undefined);
       setIsSearching(true);
       getSearchPosts(1);
     }
@@ -79,12 +81,13 @@ export default function SearchBar({ isPost }: Props) {
           {posts === undefined && <PostCardSkeleton />}
           {posts === null && <NotFound>Not Found Post!</NotFound>}
           {posts?.map((post) => (
-            <PostCard key={post.id} postCard={post} />
+            <PostCard key={post.id + debouncedValue} postCard={post} />
           ))}
           {posts !== null && posts?.length !== 0 && (
             <InfiScrollTrigger
               setIsSearching={setIsSearching}
               getSearchPosts={getSearchPosts}
+              searchText={debouncedValue}
             />
           )}
         </>
