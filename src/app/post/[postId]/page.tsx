@@ -1,3 +1,4 @@
+import PostViewer from "@/components/post/PostViewer";
 import { fetchPost } from "@/lib/post/PostFetchMethods";
 import { notFound } from "next/navigation";
 
@@ -13,10 +14,8 @@ export default async function PostPage({ params: { postId } }: Props) {
   if (post === null) notFound();
 
   return (
-    <div className="dark:text-white">
-      <div>{post.title}</div>
-      <div>{post.date}</div>
-      <div>{post.des}</div>
+    <div>
+      <PostViewer post={post} />
     </div>
   );
 }

@@ -35,7 +35,6 @@ export default function SearchBar({ isPost }: Props) {
       searchText: debouncedValue,
       page,
     });
-    console.log(result);
     if (result !== undefined && result !== null) {
       page !== 1
         ? setPosts([...(posts ?? []), ...result])
