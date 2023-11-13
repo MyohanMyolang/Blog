@@ -41,7 +41,7 @@ export default function InfiScrollTrigger({
   return (
     <>
       {duringSearch && <PostCardSkeleton />}
-      {!isEnd && <div ref={ref}>스피너어어어어어어</div>}
+      {!isEnd && <div ref={ref}></div>}
     </>
   );
 }

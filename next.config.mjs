@@ -11,7 +11,6 @@ const withMdx = nextMDX({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: true,
     instrumentationHook: true,
     mdxRs: true
   },

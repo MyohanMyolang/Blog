@@ -6,6 +6,7 @@ import {
   fetchWritePost,
 } from "@/lib/post/PostFetchMethods";
 import MDEditor, { ContextStore } from "@uiw/react-md-editor";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 
@@ -124,6 +125,9 @@ export default function WritePost({ postId }: Props) {
           </button>
         </div>
         {/* Animation을 이용하여 아래에서 올라오는 기능 구현 / intro와 image를 넣을 수 있는 창을 만든다. */}
+        <AnimatePresence mode="popLayout">
+          <motion.div animate={{ opacity: 1, scaleY: 10 }}></motion.div>
+        </AnimatePresence>
       </div>
     </>
   );
