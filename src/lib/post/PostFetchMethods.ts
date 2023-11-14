@@ -14,7 +14,7 @@ export async function fetchSearchPosts(searchData: PostSearchType) {
 }
 
 export async function fetchWritePost(post: PostWriteReqType) {
-  const result = await fetch("http://localhost:3000/api/post", {
+  const result = await fetch(`${process.env.NEXT_PUBLIC_baseUrl}/api/post`, {
     method: "post",
     body: JSON.stringify(post),
   });
@@ -46,12 +46,15 @@ export async function fetchUpdatePost(post: PostWriteReqType, postId: string) {
 }
 
 export async function fetchPost({ id }: PostReqType) {
-  const result = await fetch(`http://localhost:3000/api/post/${id}`, {
-    method: "get",
-    next: {
-      tags: [`post-${id}`],
-    },
-  });
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_baseUrl}/api/post/${id}`,
+    {
+      method: "get",
+      next: {
+        tags: [`post-${id}`],
+      },
+    }
+  );
 
   return result.json();
 }

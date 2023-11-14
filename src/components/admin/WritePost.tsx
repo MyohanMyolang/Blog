@@ -8,7 +8,14 @@ import {
 import MDEditor, { ContextStore } from "@uiw/react-md-editor";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import WriteMoreForPost from "../post/write/WriteMoreForPost";
 
 type Props = {
   postId?: string;
@@ -23,9 +30,10 @@ export default function WritePost({ postId }: Props) {
   const categoryRef = useRef<HTMLInputElement>(null);
   const route = useRouter();
 
-  const [isWriting, setIsWriting] = useState<boolean>(false);
+  const [pending, setPending] = useState<boolean>(false);
   const [post, setPost] = useState<PostType>();
   const [des, setDes] = useState<string>("");
+  const [isOpenMore, setIsOpenMore] = useState<boolean>(false);
 
   useEffect(() => {
     if (postId !== undefined) {
@@ -36,48 +44,48 @@ export default function WritePost({ postId }: Props) {
     }
   }, [postId]);
 
-  const initPostData = () => {
+  const initPostData = useCallback(() => {
     titleRef.current!.value = post?.title ?? "";
     categoryRef.current!.value = post?.category ?? "";
     setDes(post?.des ?? "");
-  };
+  }, [titleRef, categoryRef, post]);
 
   useEffect(() => {
     initPostData();
-  }, [titleRef.current, categoryRef.current]);
+  }, [initPostData]);
 
-  const onSubmit = async () => {
+  const onSubmit = async (moreData?: MoreInfoType) => {
     const post: PostWriteReqType = {
       title: titleRef.current?.value ?? "",
       category: categoryRef.current?.value ?? "",
       des: des,
       RCate: rootCate!,
     };
-    setIsWriting(true);
+    setPending(true);
     const result = await fetchWritePost(post);
     if (result !== null) {
       route.push(`/post/${result}`);
       return null;
     }
     alert("게시글 저장에 실패하였습니다!");
-    setIsWriting(false);
+    setPending(false);
   };
 
-  const onUpdate = async () => {
+  const onUpdate = async (moreData?: MoreInfoType) => {
     const post: PostWriteReqType = {
       title: titleRef.current?.value ?? "",
       category: categoryRef.current?.value ?? "",
       des: des,
       RCate: rootCate!,
     };
-    setIsWriting(true);
+    setPending(true);
     const result = await fetchUpdatePost(post, postId!);
     if (result !== null) {
       route.push(`/post/${postId}`);
       return null;
     }
     alert("게시글 수정에 실패하였습니다!");
-    setIsWriting(false);
+    setPending(false);
   };
 
   const onChangeRootCate = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -118,17 +126,25 @@ export default function WritePost({ postId }: Props) {
         <div id="wirteBtnWrapper" className="flex flex-row-reverse gap-4">
           <button
             className="p-2 transition transform active:translate-y-2 duration:300 hover:-translate-y-2 hover:border-b-2 hover:border-b-cyan-300"
-            disabled={isWriting}
-            onClick={postId === undefined ? onSubmit : onUpdate}
+            disabled={pending}
+            onClick={() => {
+              setIsOpenMore(true);
+            }}
           >
             {postId === undefined ? "작성" : "수정"}
           </button>
         </div>
-        {/* Animation을 이용하여 아래에서 올라오는 기능 구현 / intro와 image를 넣을 수 있는 창을 만든다. */}
-        <AnimatePresence mode="popLayout">
-          <motion.div animate={{ opacity: 1, scaleY: 10 }}></motion.div>
-        </AnimatePresence>
       </div>
+      {isOpenMore && (
+        <WriteMoreForPost
+          onReq={postId === undefined ? onSubmit : onUpdate}
+          onCancle={() => {
+            setIsOpenMore(false);
+          }}
+          imgSrc={post?.imgSrc}
+          intro={post?.intro}
+        />
+      )}
     </>
   );
 }
