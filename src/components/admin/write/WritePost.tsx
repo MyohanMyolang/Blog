@@ -15,7 +15,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import WriteMoreForPost from "../post/write/WriteMoreForPost";
+import WriteMoreForPost from "./WriteMoreForPost";
 
 type Props = {
   postId?: string;

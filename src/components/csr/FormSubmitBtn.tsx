@@ -10,6 +10,7 @@ type Props = {
 
 export default function LoginButton({ className, children }: Props) {
   const { pending } = useFormStatus();
+
   return (
     <button
       type="submit"

@@ -6,8 +6,15 @@ import AuthService from "@/service/common/auth/service/AuthService";
 import { RedirectType, redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
+type ResType = {
+  code: number | undefined;
+  msg: string | undefined;
+};
+
+export type loginResType = ResType & {};
+
 // TODO: Add Validate with Zod
-export async function loginAction(formData: FormData) {
+export async function loginAction(prevState: any, formData: FormData) {
   const id = formData.get("email") as string;
   const pw = formData.get("password") as string;
 
@@ -19,6 +26,10 @@ export async function loginAction(formData: FormData) {
     cookies().set("token", user);
     redirect("/", RedirectType.replace);
   }
+  return {
+    code: 403,
+    msg: "ID 또는 PassWord를 확인하여 주십시오.",
+  } as loginResType;
 }
 
 export async function logoutAction() {

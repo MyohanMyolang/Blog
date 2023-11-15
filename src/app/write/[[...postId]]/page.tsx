@@ -1,4 +1,4 @@
-import WritePost from "@/components/admin/WritePost";
+import WritePost from "@/components/admin/write/WritePost";
 import CheckAdmin from "@/lib/CheckAdmin";
 import { notFound } from "next/navigation";
 import React from "react";

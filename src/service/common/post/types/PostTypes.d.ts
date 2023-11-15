@@ -35,3 +35,5 @@ type PostSearchType = {
   searchText: string;
   page: number;
 };
+
+type MoreInfoType = Pick<PostType, "imgSrc" | "intro">;
